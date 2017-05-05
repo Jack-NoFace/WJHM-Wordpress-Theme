@@ -1,0 +1,38 @@
+/*
+Theme Name: WJHM
+Theme URI: http://www.whatjackhasmade.co.uk/
+Author: Jack Davies
+Author URI: http://www.whatjackhasmade.co.uk/
+Description: The rebrand of Jack Davies's website??
+Version: 2.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+/*///////////////
+/// MAIN
+*///////////////
+
+@import 'vars.scss';
+
+@import 'mixins/active-states.scss';
+@import 'mixins/media-queries.scss';
+@import 'mixins/rem.scss';
+
+@import 'reset/normalize.scss';
+
+@import 'base/footer.scss';
+@import 'base/header.scss';
+@import 'base/headings.scss';
+@import 'base/html.scss';
+@import 'base/images.scss';
+@import 'base/links.scss';
+
+@import 'component/container.scss';
+@import 'component/pagination.scss';
+
+@import 'trumps/background.scss';
+@import 'trumps/gradient.scss';

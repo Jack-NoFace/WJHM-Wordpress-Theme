@@ -1,0 +1,25 @@
+/*///////////////
+/// HEADER
+*///////////////
+
+header {
+    font-weight: 700;
+
+    .logo {
+        width: 10%;
+    }
+
+    ul {
+        width: 90%;
+        margin: 0;
+        padding: $spacing--normal;
+    }
+
+    li {
+        margin-left: $spacing--small;
+
+        @include bp-min-width($bp-tablet) {
+            display: inline-block;
+        }
+    }
+}

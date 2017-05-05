@@ -1,0 +1,14 @@
+/*///////////////
+/// BACKGROUND
+*///////////////
+
+.background {
+    &--primary { background-color: $color-primary; }
+    &--secondary { background-color: $color-secondary; }
+
+    &--cover {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
