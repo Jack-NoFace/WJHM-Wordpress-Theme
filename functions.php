@@ -27,10 +27,14 @@ if (function_exists('add_theme_support'))
 
     // Add Thumbnail Theme Support
     add_theme_support('post-thumbnails');
-    add_image_size('large', 700, '', true); // Large Thumbnail
-    add_image_size('medium', 250, '', true); // Medium Thumbnail
-    add_image_size('small', 120, '', true); // Small Thumbnail
-    add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
+    add_image_size('desktop--large', 2560, '', true);
+    add_image_size('desktop', 1920, '', true);
+    add_image_size('desktop--small', 1280, '', true);
+    add_image_size('tablet--large', 1024, '', true);
+    add_image_size('tablet', 768, '', true);
+    add_image_size('mobile--large', 640, '', true);
+    add_image_size('mobile', 480, '', true);
+    add_image_size('mobile--small', 320, '', true);
 
     // Add Support for Custom Backgrounds - Uncomment below if you're going to use
     /*add_theme_support('custom-background', array(

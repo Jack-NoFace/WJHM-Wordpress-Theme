@@ -27,7 +27,7 @@
 			<header class="header clear background--primary" role="banner">
 
 					<div class="logo">
-						<img src="/safari-pinned-tab.svg">
+						<a href="<?php echo home_url();?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo"></a>
 					</div>
 
 					<!-- nav -->

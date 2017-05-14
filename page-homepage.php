@@ -20,31 +20,18 @@ $loop = new WP_Query( $query ); ?>
 			<h2><?php the_title(); ?></h2>
 
             <?php if ( has_post_thumbnail()) { ?>
-            <?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'custom-size' );?>
+            <?php
+				$mobile = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'tablet--large' );
+			?>
+
             <svg>
                 <style>
-                #post-<?php the_ID(); ?> {
-				}
-
 				@media screen and (min-width: 640px) {
-                    #post-<?php the_ID(); ?> { background-image: url('<?php echo $thumb['0']; ?>'); }
-				}
-
-				@media screen and (min-width: 1024px) {
-                    #post-<?php the_ID(); ?> { background-image: url('<?php echo $thumb['0']; ?>'); }
-				}
-
-				@media screen and (min-width: 1366px) {
-					#post-<?php the_ID(); ?> { background-image: url('<?php echo $thumb['0']; ?>'); }
-				}
-
-				@media screen and (min-width: 1920px) {
-					#post-<?php the_ID(); ?> { background-image: url('<?php echo $thumb['0'];?>'); }
+                    #post-<?php the_ID(); ?> { background-image: url('<?php echo $mobile['0']; ?>'); }
 				}
                 </style>
             </svg>
-            <?php } else { ?>
-            <?php } ?>
+            <?php }?>
 
         </a>
 	</article>

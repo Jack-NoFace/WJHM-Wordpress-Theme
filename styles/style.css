@@ -462,15 +462,23 @@ footer {
 /// HEADER
 */
 header {
+  padding: 32px;
   font-weight: 700;
 }
+header nav, header .logo {
+  vertical-align: middle;
+}
 header .logo {
-  width: 10%;
+  width: 50px;
+  display: inline-block;
+}
+header nav {
+  width: calc(100% - 60px);
+  display: inline-block;
+  text-align: right;
 }
 header ul {
-  width: 90%;
   margin: 0;
-  padding: 32px;
 }
 header li {
   margin-left: 16px;
@@ -578,9 +586,9 @@ a {
   background-color: #111626;
 }
 .background--cover {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 .gradient--1 {

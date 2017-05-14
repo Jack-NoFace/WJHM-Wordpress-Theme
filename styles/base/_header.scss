@@ -3,16 +3,26 @@
 *///////////////
 
 header {
+    padding: $spacing--normal;
     font-weight: 700;
 
+    nav, .logo {
+        vertical-align: middle;
+    }
+
     .logo {
-        width: 10%;
+        width: 50px;
+        display: inline-block;
+    }
+
+    nav {
+        width: calc(100% - 60px);
+        display: inline-block;
+        text-align: right;
     }
 
     ul {
-        width: 90%;
         margin: 0;
-        padding: $spacing--normal;
     }
 
     li {
