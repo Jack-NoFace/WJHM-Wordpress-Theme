@@ -4,36 +4,52 @@
 
 $query = array(
 	'post_type' => 'post',
-	'posts_per_page' => 16,
+	'posts_per_page' => 15,
 	'paged' => $paged
 );
 
+$pattern = 0;
+
 $loop = new WP_Query( $query ); ?>
 
-<section class="container">
+<section class="grid">
 
 <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 
-	<article id="post-<?php the_ID(); ?>" class="container__post background--primary background--cover gradient--<?php echo(rand(1,10));?>">
-        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+	<article class="article">
+		<?php
 
-			<h2><?php the_title(); ?></h2>
+		if ($pattern != 5) {
+			$pattern++;
+		} else {
+			$pattern = 1;
+		}
+		?>
 
-            <?php if ( has_post_thumbnail()) { ?>
-            <?php
-				$mobile = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'tablet--large' );
+		<div id="post-<?php the_ID(); ?>" class="article__thumbnail background--primary pattern--<?php echo $pattern;?>">
+		</div>
+
+		<div class="article__details">
+			<h2 style="font-weight: 400;"><?php the_title(); ?></h2>
+		</div>
+
+        <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+		</a>
+
+        <svg>
+            <style>
+			<?php if ( has_post_thumbnail()) { ?>
+	        <?php
+				$mobile = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'mobile' );
 			?>
 
-            <svg>
-                <style>
-				@media screen and (min-width: 640px) {
-                    #post-<?php the_ID(); ?> { background-image: url('<?php echo $mobile['0']; ?>'); }
-				}
-                </style>
-            </svg>
-            <?php }?>
+			@media screen and (min-width: 640px) {
+                #post-<?php the_ID(); ?> { background-image: url('<?php echo $mobile['0']; ?>'); }
+			}
+            </style>
+        </svg>
+        <?php }?>
 
-        </a>
 	</article>
 
 	<?php endwhile; ?>
