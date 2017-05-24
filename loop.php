@@ -1,31 +1,39 @@
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
 	<!-- article -->
-	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<article class="article">
+		<?php
 
-		<!-- post thumbnail -->
-		<?php if ( has_post_thumbnail()) : // Check if thumbnail exists ?>
-			<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-				<?php the_post_thumbnail(array(120,120)); // Declare pixel size you need inside the array ?>
-			</a>
-		<?php endif; ?>
-		<!-- /post thumbnail -->
+		if ($pattern != 5) {
+			$pattern++;
+		} else {
+			$pattern = 1;
+		}
+		?>
 
-		<!-- post title -->
-		<h2>
-			<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
-		</h2>
-		<!-- /post title -->
+		<div id="post-<?php the_ID(); ?>" class="article__thumbnail background--primary pattern--<?php echo $pattern;?>">
+		</div>
 
-		<!-- post details -->
-		<span class="date"><?php the_time('F j, Y'); ?> <?php the_time('g:i a'); ?></span>
-		<span class="author"><?php _e( 'Published by', 'html5blank' ); ?> <?php the_author_posts_link(); ?></span>
-		<span class="comments"><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'html5blank' ), __( '1 Comment', 'html5blank' ), __( '% Comments', 'html5blank' )); ?></span>
-		<!-- /post details -->
+		<div class="article__details">
+			<h2 style="font-weight: 400;"><?php the_title(); ?></h2>
+		</div>
 
-		<?php html5wp_excerpt('html5wp_index'); // Build your custom callback length in functions.php ?>
+        <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+		</a>
 
-		<?php edit_post_link(); ?>
+        <svg>
+            <style>
+			<?php if ( has_post_thumbnail()) { ?>
+	        <?php
+				$mobile = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'mobile' );
+			?>
+
+			@media screen and (min-width: 640px) {
+                #post-<?php the_ID(); ?> { background-image: url('<?php echo $mobile['0']; ?>'); }
+			}
+            </style>
+        </svg>
+        <?php }?>
 
 	</article>
 	<!-- /article -->
