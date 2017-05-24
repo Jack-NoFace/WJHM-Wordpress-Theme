@@ -20,15 +20,15 @@
 	</head>
 	<body <?php body_class(); ?>>
 
-		<!-- wrapper -->
-		<div class="wrapper">
-
 			<!-- header -->
 			<header class="header clear background--primary" role="banner">
 
 					<div class="logo">
 						<a href="<?php echo home_url();?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo"></a>
 					</div>
+
+					<input type="checkbox" name="hamburger" id="hamburger">
+					<label for="hamburger"></label>
 
 					<!-- nav -->
 					<nav class="nav" role="navigation">
