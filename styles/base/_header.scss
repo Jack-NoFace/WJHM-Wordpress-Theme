@@ -4,32 +4,88 @@
 
 header {
     padding: $spacing--normal;
+
     font-weight: 700;
+
+    @include bp-max-width($bp-tablet) {
+
+        input[type="checkbox"] {
+            width: 0;
+            height: 0;
+
+            transform: translateX(-500px);
+
+            & + label {
+                cursor: pointer;
+
+                position: absolute;
+                top: $spacing--normal + 5px;
+                right: $spacing--normal;
+
+                width: $spacing--normal;
+                height: $spacing--normal;
+
+                background: url(data:image/svg+xml,%3Csvg%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20448%20448%22%3E%3Cstyle%3E.st0%7Bfill%3A%23FFFFFF%3B%7D%3C/style%3E%3Cpath%20class%3D%22st0%22%20d%3D%22M424%20112H24c-13.2%200-24-10.8-24-24V56c0-13.2%2010.8-24%2024-24h400c13.2%200%2024%2010.8%2024%2024v32c0%2013.2-10.8%2024-24%2024zm0%20304H24c-13.2%200-24-10.8-24-24v-32c0-13.2%2010.8-24%2024-24h400c13.2%200%2024%2010.8%2024%2024v32c0%2013.2-10.8%2024-24%2024zm0-152H24c-13.2%200-24-10.8-24-24v-32c0-13.2%2010.8-24%2024-24h400c13.2%200%2024%2010.8%2024%2024v32c0%2013.2-10.8%2024-24%2024z%22/%3E%3C/svg%3E);
+
+                @include bp-min-width($bp-tablet) {
+                    display: none;
+                }
+
+                & + nav {
+                    display: none;
+                }
+            }
+
+            &:checked + label + nav {
+                display: block;
+
+                padding-top: $spacing--normal;
+            }
+
+        }
+    }
 
     nav, .logo {
         vertical-align: middle;
     }
 
     .logo {
-        width: 50px;
         display: inline-block;
+
+        width: 50px;
     }
 
     nav {
-        width: calc(100% - 60px);
-        display: inline-block;
-        text-align: right;
+        @include bp-min-width($bp-tablet) {
+            display: inline-block;
+
+            width: calc(100% - 60px);
+
+            text-align: right;
+        }
+    }
+
+    input[type="checkbox"] {
+        @include bp-min-width($bp-tablet) {
+            display: none;
+        }
     }
 
     ul {
-        margin: 0;
+        padding: 0;
+
+        list-style: none;
     }
 
     li {
-        margin-left: $spacing--small;
+        margin-bottom: $spacing--small;
 
         @include bp-min-width($bp-tablet) {
             display: inline-block;
+
+            margin-bottom: 0;
+
+            margin-left: $spacing--small;
         }
     }
 }

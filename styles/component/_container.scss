@@ -2,45 +2,111 @@
 /// CONTAINER
 *///////////////
 
-.container {
-    &__post {
-        width: 100%;
-        height: 200px;
-        float: left;
-        position: relative;
+.grid {
+    display: block;
+
+    @supports(display: grid) {
+        display: grid;
+
+        padding: $spacing--tiny;
+
+        grid-gap: $spacing--normal;
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+        grid-auto-rows: 250px;
+        grid-auto-flow: row dense;
 
         @include bp-min-width($bp-tablet) {
-            width: 50%;
-        }
-
-        @include bp-min-width($bp-desktop--small) {
-            width: 25%;
-        }
-
-        a {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 30px;
             padding: $spacing--normal;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transition: 0.2s background-color ease;
-            background-color: rgba($color-black, 0.4);
+        }
+    }
+}
 
+.article {
+    position: relative;
+    float: left;
+    width: 25%;
+    min-height: 300px;
+
+    @supports(display: grid) {
+        width: auto;
+        float: none;
+        min-height: auto;
+
+
+        display: flex;
+        flex-direction: column;
+
+        box-sizing: border-box;
+
+        transition: transform 0.1s ease-in-out;
+
+        color: $color-white;
+        background-color: $color-primary;
+
+        justify-content: flex-end;
+        grid-column-start: auto;
+        grid-row-start: auto;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+
+        &--full {
+            grid-column-end: auto;
             @include bp-min-width($bp-tablet) {
-                background-color: none;
-            }
-
-
-            @include active-states() {
-                background-color: rgba($color-black, 0.8);
+                grid-column: 1/-1;
+                grid-row-end: span 2;
             }
         }
     }
 
+    .link--cover {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+
     svg {
         display: none;
-        width: 0;
-        height: 0;
+    }
+
+    &__thumbnail {
+        height: 200px;
+
+        @include bp-min-width($bp-tablet) {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+    }
+
+    &__details {
+        position: relative;
+        z-index: 1;
+
+        padding: $spacing--small;
+
+        text-transform: capitalize;
+
+        background: $color-primary;
+
+        h2 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        p {
+            display: block;
+
+            @include bp-min-width($bp-tablet) {
+                display: none;
+            }
+        }
     }
 }

@@ -4,13 +4,18 @@
 
 $base-unit: 8px;
 
-$bp-tablet: 768px;
+$bp-mobile--large: 480px;
+$bp-tablet: 640px;
 $bp-desktop--small: 1024px;
 
 $color-primary : #771611;
 $color-secondary : #111626;
 $color-white : #FFFFFF;
+$color-white-off : #DEDEDE;
 $color-black : #000000;
+
+$color-dark-red : darken(#771611, 10%);
+
 
 
 $spacing--tiny: $base-unit;

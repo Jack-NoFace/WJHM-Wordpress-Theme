@@ -1,0 +1,23 @@
+/*///////////////
+/// WRAPPER
+*///////////////
+
+.wrapper {
+    max-width: 700px + ($spacing--normal * 2);
+    margin: 0 auto;
+    padding: $spacing--normal;
+
+    background-color: $color-white;
+
+    flex: 1;
+
+    a {
+        color: $color-primary;
+        text-decoration: underline;
+        transition: 0.4s color ease;
+
+        @include active-states() {
+            color: $color-black;
+        }
+    }
+}
