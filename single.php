@@ -4,17 +4,15 @@
 	<!-- section -->
 	<?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
-			<div class="wrapper">
+			<div class="wrapper post">
 
 			<!-- post title -->
-			<h1>
-				<?php the_title(); ?>
-			</h1>
+			<h1><?php the_title(); ?></h1>
 			<!-- /post title -->
 
-			<span class="breadcrumbs"><?php the_category(' ') ?></span>
-
 			<?php the_content(); // Dynamic Content ?>
+
+			<?php get_template_part( 'related' ); ?>
 
 			</div>
 
