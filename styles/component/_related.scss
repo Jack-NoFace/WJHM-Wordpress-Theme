@@ -1,0 +1,20 @@
+/*///////////////
+/// RELATED
+*///////////////
+
+.related {
+    margin-top: 4.5rem;
+
+    section {
+        padding: 0;
+    }
+
+    &__thumbnail {
+        height: 200px;
+    }
+
+    &:after {
+        content: "";
+        clear: both;
+    }
+}
