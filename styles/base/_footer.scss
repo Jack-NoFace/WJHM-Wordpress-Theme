@@ -3,7 +3,23 @@
 *///////////////
 
 footer {
-    text-transform: uppercase;
-    
-    padding: $spacing--normal;
+    clear: both;
+    text-align: center;
+    padding: $spacing--small;
+
+    .list__item {
+        margin-left: $spacing--tiny;
+
+        &:nth-of-type(1) {
+            margin-left: 0;
+        }
+    }
+
+    @include bp-min-width($bp-tablet) {
+        padding: $spacing--normal;
+
+        .list__item {
+            margin-left: $spacing--small;
+        }
+    }
 }
