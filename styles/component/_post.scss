@@ -1,0 +1,25 @@
+/*///////////////
+/// POST
+*///////////////
+
+.post {
+    width: 100%;
+
+    > * + * { margin-top: 1.5rem }
+    > h2 + * { margin-top: 1rem }
+    > img + *, > figure + * { margin-top: 3rem }
+    > * + h2 { margin-top: 4.5rem }
+    > * + h3 { margin-top: 3.5rem }
+    > * + img { margin-top: 3rem }
+    > img + img, > figure + figure { margin-top: 1rem }
+    > h2 + h3 { margin-top: 2rem }
+    > .related { margin-top: 4.5rem; }
+
+    @include bp-min-width($bp-tablet) {
+        & > *:not(img):not(figure):not(.ignore) {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
