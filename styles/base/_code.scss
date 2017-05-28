@@ -1,0 +1,12 @@
+/*///////////////
+/// CODE
+*///////////////
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    background-color: $color-secondary;
+    color: $color-white;
+    padding: 0 $spacing--normal $spacing--normal;
+}
