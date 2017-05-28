@@ -4,11 +4,14 @@
 
 .grid {
     display: block;
+    padding: $spacing--tiny;
+
+    @include bp-min-width($bp-tablet) {
+        padding: $spacing--normal;
+    }
 
     @supports(display: grid) {
         display: grid;
-
-        padding: $spacing--tiny;
 
         grid-gap: $spacing--normal;
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
@@ -18,40 +21,49 @@
         @include bp-min-width($bp-tablet) {
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             grid-gap: 30px;
-            padding: $spacing--normal;
         }
     }
 }
 
-.article {
+.grid-item {
     position: relative;
-    float: left;
-    width: 25%;
     min-height: 300px;
+    color: $color-white;
+    background-color: $color-primary;
+    transition: transform 0.1s ease-in-out;
+    margin: 0 1% $spacing--normal;
+
+
+    @include bp-min-width($bp-tablet) {
+        float: left;
+        width: 31%;
+    }
+
+    @include bp-min-width($bp-desktop--small) {
+        float: left;
+        width: 23%;
+    }
+
+    &:hover {
+        transform: scale(1.02);
+    }
+
+    @supports(display: flex) {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 
     @supports(display: grid) {
+        margin: 0;
         width: auto;
         float: none;
         min-height: auto;
 
-
-        display: flex;
-        flex-direction: column;
-
         box-sizing: border-box;
 
-        transition: transform 0.1s ease-in-out;
-
-        color: $color-white;
-        background-color: $color-primary;
-
-        justify-content: flex-end;
         grid-column-start: auto;
         grid-row-start: auto;
-
-        &:hover {
-            transform: scale(1.02);
-        }
 
         &--full {
             grid-column-end: auto;
