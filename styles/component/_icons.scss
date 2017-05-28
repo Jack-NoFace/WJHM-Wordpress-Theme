@@ -1,0 +1,35 @@
+/*///////////////
+/// ICONS
+*///////////////
+
+.icon {
+    text-align: center;
+
+    fill: $color-white;
+    transition: 0.4s fill ease, 0.4s color ease;
+
+    & svg {
+        width: 22px;
+        height: 22px;
+
+        @include bp-min-width($bp-tablet) {
+            margin: 0 auto $spacing--tiny;
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    & span {
+        display: none;
+
+        @include bp-min-width($bp-tablet) {
+            width: 65px;
+            display: block;
+        }
+    }
+
+    &:hover {
+        fill: $color-secondary;
+        color: $color-secondary;
+    }
+}
