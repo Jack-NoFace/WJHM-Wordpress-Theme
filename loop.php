@@ -1,7 +1,7 @@
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
 	<!-- article -->
-	<article class="article">
+	<article class="grid-item">
 		<?php
 
 		if ($pattern != 5) {
@@ -11,10 +11,10 @@
 		}
 		?>
 
-		<div id="post-<?php the_ID(); ?>" class="article__thumbnail background--primary pattern--<?php echo $pattern;?>">
+		<div id="post-<?php the_ID(); ?>" class="grid-item__thumbnail background--primary pattern--<?php echo $pattern;?>">
 		</div>
 
-		<div class="article__details">
+		<div class="grid-item__details">
 			<h2 style="font-weight: 400;"><?php the_title(); ?></h2>
 		</div>
 
