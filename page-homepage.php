@@ -12,6 +12,13 @@ $pattern = 0;
 
 $loop = new WP_Query( $query ); ?>
 
+<main role="main">
+	<!-- section -->
+
+<section>
+
+<h1>WhatJackHasMade - Latest Posts</h1>
+
 <section class="grid">
 
 <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
@@ -34,6 +41,7 @@ $loop = new WP_Query( $query ); ?>
 		</div>
 
         <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+			<?php the_title(); ?>
 		</a>
 
         <svg>
@@ -55,6 +63,11 @@ $loop = new WP_Query( $query ); ?>
 	<?php endwhile; ?>
 
 </section>
+
+</section>
+
+
+</main>
 
 <?php if ($loop->max_num_pages > 1) { // check if the max number of pages is greater than 1  ?>
 	<nav class="pagination background--secondary">
