@@ -4,11 +4,11 @@
 		<meta charset="<?php bloginfo('charset'); ?>">
 		<title><?php wp_title(''); ?><?php if(wp_title('', false)) { echo ' :'; } ?> <?php bloginfo('name'); ?></title>
 
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href="/manifest.json">
-		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#771611">
+		<link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/img/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/img/favicon/manifest.json">
+		<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/safari-pinned-tab.svg" color="#771611">
 		<meta name="theme-color" content="#771611">
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,11 +24,11 @@
 			<header class="header clear background--primary" role="banner">
 
 					<div class="logo">
-						<a href="<?php echo home_url();?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo"></a>
+						<a href="<?php echo home_url();?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="WhatJackHasMade Brand Logo"></a>
 					</div>
 
 					<input type="checkbox" name="hamburger" id="hamburger">
-					<label for="hamburger"></label>
+					<label for="hamburger">Open/Close Mobile Navigation</label>
 
 					<!-- nav -->
 					<nav class="nav" role="navigation">
