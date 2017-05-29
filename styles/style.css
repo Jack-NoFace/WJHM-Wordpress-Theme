@@ -510,6 +510,9 @@ header {
   padding: 32px;
   font-weight: 700;
 }
+header label {
+  display: none;
+}
 @media all and (max-width: 640px) {
   header input[type="checkbox"] {
     width: 0;
@@ -517,6 +520,11 @@ header {
     transform: translateX(-500px);
   }
   header input[type="checkbox"] + label {
+    display: block;
+    /* Hide the text. */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
     cursor: pointer;
     position: absolute;
     top: 37px;
@@ -612,6 +620,19 @@ a {
   text-decoration: none;
   word-wrap: break-word;
   white-space: pre-wrap;
+}
+
+.link--cover {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Hide the text. */
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*///////////////
@@ -769,14 +790,6 @@ section h1 {
       grid-row-end: span 2;
     }
   }
-}
-.grid-item .link--cover {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 .grid-item svg {
   display: none;
