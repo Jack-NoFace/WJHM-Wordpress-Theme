@@ -36,18 +36,26 @@
 
     <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">View Article</a>
 
+    <?php
+    if ( has_post_thumbnail()) {
+        $thumbnailMobile = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'mobile' );
+        $thumbnail = $thumbnailMobile['0'];
+    } else {
+        $thumbnail = get_template_directory_uri() . '/img/placeholder.png';
+    }
+    ?>
+
+    <?php if ($thumbnail) { ?>
+
     <svg>
         <style>
-        <?php if ( has_post_thumbnail()) { ?>
-        <?php
-            $mobile = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'mobile' );
-        ?>
-
         @media screen and (min-width: 640px) {
-            #post-<?php the_ID(); ?> { background-image: url('<?php echo $mobile['0']; ?>'); }
+            #post-<?php the_ID(); ?> { background-image: url('<?php echo $thumbnail; ?>'); }
         }
         </style>
     </svg>
-    <?php }?>
+
+    <?php } ?>
+
 
 </article>
