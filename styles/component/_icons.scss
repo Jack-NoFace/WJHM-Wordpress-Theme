@@ -6,7 +6,7 @@
     text-align: center;
 
     fill: $color-white;
-    transition: 0.4s fill ease, 0.4s color ease;
+    transition: 0.2s fill ease, 0.2s color ease;
 
     & svg {
         width: 22px;
@@ -27,9 +27,13 @@
             display: block;
         }
     }
+}
 
+.list__item {
     &:hover {
-        fill: $color-secondary;
-        color: $color-secondary;
+        .icon, span {
+            fill: $color-secondary;
+            color: $color-secondary;
+        }
     }
 }

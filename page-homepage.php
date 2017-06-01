@@ -37,12 +37,19 @@ $loop = new WP_Query( $query ); ?>
 		</div>
 
 		<div class="grid-item__details">
-			<h2 style="font-weight: 400;"><?php the_title(); ?></h2>
+			<h2><?php the_title(); ?></h2>
+
+			<?php $meta = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true); ?>
+			<?php
+
+			if ($meta) {
+				echo "<p>" . $meta . "</p>";
+			}
+
+			?>
 		</div>
 
-        <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-			<?php the_title(); ?>
-		</a>
+		<a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">View Article</a>
 
         <svg>
             <style>

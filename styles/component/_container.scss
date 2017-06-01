@@ -4,6 +4,7 @@
 
 .grid {
     display: block;
+
     padding: $spacing--tiny;
 
     @include bp-min-width($bp-tablet) {
@@ -15,9 +16,7 @@
 
         grid-gap: $spacing--normal;
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
-        grid-auto-rows: 250px;
         grid-auto-flow: row dense;
-
         @include bp-min-width($bp-tablet) {
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             grid-gap: 30px;
@@ -27,40 +26,43 @@
 
 .grid-item {
     position: relative;
+
     min-height: 300px;
-    color: $color-white;
-    background-color: $color-primary;
-    transition: transform 0.1s ease-in-out;
     margin: 0 1% $spacing--normal;
 
+    transition: transform 0.1s ease-in-out;
+
+    color: $color-black;
+    border-radius: 4px;
+    background-color: $color-white;
 
     @include bp-min-width($bp-tablet) {
         float: left;
+
         width: 31%;
     }
-
+    
     @include bp-min-width($bp-desktop--small) {
         float: left;
-        width: 23%;
-    }
 
-    &:hover {
-        transform: scale(1.02);
+        width: 23%;
     }
 
     @supports(display: flex) {
         display: flex;
         flex-direction: column;
+
         justify-content: flex-start;
     }
 
     @supports(display: grid) {
-        margin: 0;
-        width: auto;
         float: none;
-        min-height: auto;
 
         box-sizing: border-box;
+        width: auto;
+        min-height: auto;
+
+        margin: 0;
 
         grid-column-start: auto;
         grid-row-start: auto;
@@ -81,10 +83,12 @@
     &__thumbnail {
         height: 200px;
 
+        border-radius: 4px 4px 0 0;
+
         @include bp-min-width($bp-tablet) {
             background-repeat: no-repeat;
-            background-size: cover;
             background-position: center center;
+            background-size: cover;
         }
     }
 
@@ -92,23 +96,32 @@
         position: relative;
         z-index: 1;
 
+        display: flex;
+        flex-direction: column;
+
+        height: calc(100% - 200px);
         padding: $spacing--small;
 
         text-transform: capitalize;
 
-        background: $color-primary;
+        border-radius: 0 0 4px 4px;
+        background: $color-white;
+
+        flex: 1;
 
         h2 {
-            margin: 0;
             font-size: 1.3rem;
         }
 
         p {
-            display: block;
+            margin-top: 0;
+        }
 
-            @include bp-min-width($bp-tablet) {
-                display: none;
-            }
+        @supports(display: flex) {
+            display: flex;
+            flex-direction: column;
+
+            justify-content: flex-start;
         }
     }
 }

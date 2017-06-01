@@ -15,7 +15,11 @@
 		</div>
 
 		<div class="grid-item__details">
-			<h2 style="font-weight: 400;"><?php the_title(); ?></h2>
+			<h2><?php the_title(); ?></h2>
+			<?php
+			echo get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
+
+			?>
 		</div>
 
         <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">

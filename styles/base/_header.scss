@@ -3,7 +3,7 @@
 *///////////////
 
 header {
-    padding: $spacing--normal;
+    padding: $spacing--small $spacing--normal;
 
     font-weight: 700;
 
@@ -21,7 +21,7 @@ header {
 
             & + label {
                 display: block;
-                
+
                 /* Hide the text. */
                 text-indent: 100%;
                 white-space: nowrap;
