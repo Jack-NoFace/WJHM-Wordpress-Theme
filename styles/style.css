@@ -708,7 +708,7 @@ section h1 {
   transition: 0.4s color ease;
 }
 .wrapper a:hover, .wrapper a:focus, .wrapper a:active {
-  color: #000000;
+  color: #121212;
 }
 
 /*///////////////
@@ -760,7 +760,7 @@ section h1 {
   min-height: 300px;
   margin: 0 1% 32px;
   transition: transform 0.1s ease-in-out;
-  color: #000000;
+  color: #121212;
   border-radius: 4px;
   background-color: #FFFFFF;
 }
