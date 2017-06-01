@@ -11,7 +11,7 @@ module.exports = function(grunt) {
                     cwd: 'styles/',
                     src: ['*.css', '!*.min.css'],
                     dest: '.',
-                    ext: '.css'
+                    ext: '.min.css'
                 }]
             }
         },
@@ -32,7 +32,8 @@ module.exports = function(grunt) {
                     style: 'expanded'
                 },
                 files: {                         // Dictionary of files
-                    'styles/style.css': 'styles/main.scss'  // 'destination': 'source'
+                    'styles/style.css': 'styles/main.scss',
+                    'styles/admin--login.css': 'admin--login.scss'  // 'destination': 'source'
                 }
             }
         },
@@ -43,7 +44,8 @@ module.exports = function(grunt) {
           },
           dist: { // Target
             files: {
-              'style-release.css': 'style.css'
+              'style-release.css': 'styles/style.css',
+              'admin--login-release.css': 'styles/admin--login.css'
             }
           }
         }
