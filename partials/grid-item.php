@@ -14,15 +14,24 @@
     <div class="grid-item__details">
         <h2><?php the_title(); ?></h2>
 
-        <?php $meta = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true); ?>
         <?php
+        $meta = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
 
         if ($meta) {
             echo "<hr>";
             echo "<p>" . $meta . "</p>";
         }
-
         ?>
+
+        <?php
+        $date = the_date('M Y');
+
+        if ($date) { ?>
+            <h3>Published: <?php echo $date; ?></h3>
+        <?php
+        }
+        ?>
+
     </div>
 
     <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">View Article</a>
