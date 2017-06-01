@@ -41,7 +41,7 @@
 
         width: 31%;
     }
-    
+
     @include bp-min-width($bp-desktop--small) {
         float: left;
 
@@ -102,8 +102,6 @@
         height: calc(100% - 200px);
         padding: $spacing--small;
 
-        text-transform: capitalize;
-
         border-radius: 0 0 4px 4px;
         background: $color-white;
 
@@ -111,6 +109,7 @@
 
         h2 {
             font-size: 1.3rem;
+            text-transform: capitalize;
         }
 
         p {

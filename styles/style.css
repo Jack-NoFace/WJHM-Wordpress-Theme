@@ -824,13 +824,13 @@ section h1 {
   flex-direction: column;
   height: calc(100% - 200px);
   padding: 16px;
-  text-transform: capitalize;
   border-radius: 0 0 4px 4px;
   background: #FFFFFF;
   flex: 1;
 }
 .grid-item__details h2 {
   font-size: 1.3rem;
+  text-transform: capitalize;
 }
 .grid-item__details p {
   margin-top: 0;

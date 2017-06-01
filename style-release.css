@@ -868,7 +868,6 @@ section h1 {
   height: -webkit-calc(100% - 200px);
   height: calc(100% - 200px);
   padding: 16px;
-  text-transform: capitalize;
   border-radius: 0 0 4px 4px;
   background: #FFFFFF;
   -webkit-box-flex: 1;
@@ -878,6 +877,7 @@ section h1 {
 }
 .grid-item__details h2 {
   font-size: 1.3rem;
+  text-transform: capitalize;
 }
 .grid-item__details p {
   margin-top: 0;
