@@ -346,7 +346,6 @@ add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
 
-
 // Remove jQuery Migrate Script from header and Load jQuery from Google API
 function crunchify_stop_loading_wp_embed_and_jquery() {
 	if (!is_admin()) {
@@ -362,7 +361,7 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
-// Customise login page
+// Load theme logo on login page
 function my_login_logo() { ?>
     <style type="text/css">
         #login h1 a, .login h1 a {
@@ -370,16 +369,29 @@ function my_login_logo() { ?>
         }
     </style>
 <?php }
+
 add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
+// Bespoke admin stylesheet on login page
 function my_login_stylesheet() {
     wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/admin--login.min.css' );
 }
+
 add_action( 'login_enqueue_scripts', 'my_login_stylesheet' );
+
+// Include blog name in footer of admin dashboard page
+function wpse_edit_footer() {
+    add_filter( 'admin_footer_text', 'wpse_edit_text', 11 );
+}
+
+function wpse_edit_text($content) {
+    return bloginfo( 'name' );
+}
+
+add_action( 'admin_init', 'wpse_edit_footer' );
 
 // Remove admin navigation in dashboard
 function wpt_remove_menus(){
-
     //remove_menu_page( 'index.php' );                  //Dashboard
     //remove_menu_page( 'edit.php' );                   //Posts
     //remove_menu_page( 'upload.php' );                 //Media
@@ -391,8 +403,8 @@ function wpt_remove_menus(){
     //remove_menu_page( 'users.php' );                  //Users
     //remove_menu_page( 'tools.php' );                  //Tools
     //remove_menu_page( 'options-general.php' );        //Settings
-
 }
+
 add_action( 'admin_menu', 'wpt_remove_menus' );
 
 ?>
