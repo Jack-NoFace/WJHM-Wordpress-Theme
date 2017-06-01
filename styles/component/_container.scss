@@ -107,10 +107,15 @@
 
         flex: 1;
 
-        h2 {
+        h2, h3 {
             font-size: 1.3rem;
             text-transform: capitalize;
             margin: 0;
+        }
+
+        h3 {
+            font-size: 0.8rem;
+            color: $color-grey;
         }
 
         p {

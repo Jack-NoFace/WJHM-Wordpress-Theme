@@ -840,10 +840,14 @@ section h1 {
   background: #FFFFFF;
   flex: 1;
 }
-.grid-item__details h2 {
+.grid-item__details h2, .grid-item__details h3 {
   font-size: 1.3rem;
   text-transform: capitalize;
   margin: 0;
+}
+.grid-item__details h3 {
+  font-size: 0.8rem;
+  color: #888;
 }
 .grid-item__details p {
   margin-top: 0;
