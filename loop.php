@@ -16,14 +16,18 @@
 
 		<div class="grid-item__details">
 			<h2><?php the_title(); ?></h2>
+
+			<?php $meta = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true); ?>
 			<?php
-			echo get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
+
+			if ($meta) {
+				echo "<p>" . $meta . "</p>";
+			}
 
 			?>
 		</div>
 
-        <a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-		</a>
+		<a class="link--cover" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">View Article</a>
 
         <svg>
             <style>
