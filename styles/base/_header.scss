@@ -30,7 +30,7 @@ header {
                 cursor: pointer;
 
                 position: absolute;
-                top: $spacing--normal + 5px;
+                top: $spacing--small + 5px;
                 right: $spacing--normal;
 
                 width: $spacing--normal;
@@ -86,23 +86,6 @@ header {
         padding: 0;
 
         list-style: none;
-
-        a {
-            &:after {
-                content: '';
-                display: block;
-                width: 0;
-                height: 2px;
-                background: $color-white;
-                transition: width .3s;
-            }
-
-            &:hover {
-                &:after {
-                    width: 100%;
-                }
-            }
-        }
     }
 
     li {
