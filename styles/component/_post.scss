@@ -2,9 +2,14 @@
 /// POST
 *///////////////
 
+body.single-post {
+    background-color: $color-white;
+}
+
 .post {
     width: 100%;
 
+    > h1 { margin-bottom: 0.2rem; }
     > * + * { margin-top: 1.5rem }
     > h2 + * { margin-top: 1rem }
     > img + *, > figure + * { margin-top: 3rem }
@@ -13,6 +18,7 @@
     > * + img { margin-top: 3rem }
     > img + img, > figure + figure { margin-top: 1rem }
     > h2 + h3 { margin-top: 2rem }
+    > p + a img { margin-top: 1rem }
     > .related { margin-top: 4.5rem; }
 
     @include bp-min-width($bp-tablet) {
