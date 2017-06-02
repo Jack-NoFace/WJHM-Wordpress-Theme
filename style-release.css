@@ -17,6 +17,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 /*///////////////
 /// VARS
 */
+/* Brand Colours */
 /*///////////////
 /// ACTIVE STATES
 */
@@ -536,7 +537,7 @@ header label {
     overflow: hidden;
     cursor: pointer;
     position: absolute;
-    top: 37px;
+    top: 21px;
     right: 32px;
     width: 32px;
     height: 32px;
@@ -580,18 +581,6 @@ header .logo {
 header ul {
   padding: 0;
   list-style: none;
-}
-header ul a:after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  background: #FFFFFF;
-  -webkit-transition: width .3s;
-          transition: width .3s;
-}
-header ul a:hover:after {
-  width: 100%;
 }
 header li {
   margin-bottom: 16px;
@@ -683,6 +672,22 @@ a {
 }
 .link--cover:hover:before, .link--cover:focus:before, .link--cover:active:before {
   opacity: 0.2;
+}
+
+.link--fancy {
+  display: inline-block;
+}
+.link--fancy:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  background: #FFFFFF;
+  -webkit-transition: width .3s;
+          transition: width .3s;
+}
+.link--fancy:hover:after, .link--fancy:focus:after, .link--fancy:active:after {
+  width: 100%;
 }
 
 /*///////////////
@@ -933,10 +938,56 @@ section h1 {
 /// ICONS
 */
 .icon {
+  position: relative;
   text-align: center;
+  color: #FFFFFF;
   fill: #FFFFFF;
   -webkit-transition: 0.2s fill ease, 0.2s color ease;
           transition: 0.2s fill ease, 0.2s color ease;
+}
+.icon__behance:hover, .icon__behance:focus, .icon__behance:active {
+  fill: #1769FF;
+  color: #1769FF;
+}
+.icon__codepen:hover, .icon__codepen:focus, .icon__codepen:active {
+  fill: #000000;
+  color: #000000;
+}
+.icon__github:hover, .icon__github:focus, .icon__github:active {
+  fill: #181717;
+  color: #181717;
+}
+.icon__linkedin:hover, .icon__linkedin:focus, .icon__linkedin:active {
+  fill: #1769FF;
+  color: #1769FF;
+}
+.icon__outlook:hover, .icon__outlook:focus, .icon__outlook:active {
+  fill: #0072C6;
+  color: #0072C6;
+}
+.icon__twitter:hover, .icon__twitter:focus, .icon__twitter:active {
+  fill: #1DA1F2;
+  color: #1DA1F2;
+}
+.icon__youtube:hover, .icon__youtube:focus, .icon__youtube:active {
+  fill: #CD201F;
+  color: #CD201F;
+}
+.icon a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.icon span {
+  display: none;
+}
+@media all and (min-width: 640px) {
+  .icon span {
+    width: 65px;
+    display: block;
+  }
 }
 .icon svg {
   width: 22px;
@@ -948,20 +999,6 @@ section h1 {
     width: 32px;
     height: 32px;
   }
-}
-.icon span {
-  display: none;
-}
-@media all and (min-width: 640px) {
-  .icon span {
-    width: 65px;
-    display: block;
-  }
-}
-
-.list__item:hover .icon, .list__item:hover span {
-  fill: #111626;
-  color: #111626;
 }
 
 /*///////////////
@@ -988,6 +1025,9 @@ section h1 {
 .pagination {
   text-align: right;
   padding: 32px;
+}
+.pagination span {
+  margin-left: 16px;
 }
 
 /*///////////////
@@ -1073,6 +1113,9 @@ body.single-post {
 }
 .color--white {
   color: #FFFFFF;
+}
+.color--white-off {
+  color: #DEDEDE;
 }
 .color--grey {
   color: #888;
