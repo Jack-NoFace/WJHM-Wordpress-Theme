@@ -571,6 +571,17 @@ header ul {
   padding: 0;
   list-style: none;
 }
+header ul a:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #FFFFFF;
+  transition: width .3s;
+}
+header ul a:hover:after {
+  width: 100%;
+}
 header li {
   margin-bottom: 16px;
 }
@@ -923,8 +934,15 @@ section h1 {
 /*///////////////
 /// POST
 */
+body.single-post {
+  background-color: #FFFFFF;
+}
+
 .post {
   width: 100%;
+}
+.post > h1 {
+  margin-bottom: 0.2rem;
 }
 .post > * + * {
   margin-top: 1.5rem;
@@ -949,6 +967,9 @@ section h1 {
 }
 .post > h2 + h3 {
   margin-top: 2rem;
+}
+.post > p + a img {
+  margin-top: 1rem;
 }
 .post > .related {
   margin-top: 4.5rem;
@@ -977,6 +998,25 @@ section h1 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/*///////////////
+/// COLOR
+*/
+.color--primary {
+  color: #771611;
+}
+.color--secondary {
+  color: #111626;
+}
+.color--black {
+  color: #121212;
+}
+.color--white {
+  color: #FFFFFF;
+}
+.color--grey {
+  color: #888;
 }
 
 /*///////////////
