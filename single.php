@@ -10,6 +10,17 @@
 			<h1><?php the_title(); ?></h1>
 			<!-- /post title -->
 
+			<span class="color-grey"><?php the_author(); ?> | </span>
+
+			<?php
+			$date = the_date('jS F Y');
+
+			if ($date) { ?>
+				<span class="color-grey">Published: <?php echo $date; ?></span>
+			<?php
+			}
+			?>
+
 			<?php the_content(); // Dynamic Content ?>
 
 			<?php get_template_part( 'related' ); ?>
