@@ -23,12 +23,10 @@
         }
         ?>
 
+        <span><?php echo the_date('F Y'); ?>  | 
         <?php
-        $date = the_date('M Y');
-
-        if ($date) { ?>
-            <h3>Published: <?php echo $date; ?></h3>
-        <?php
+        foreach((get_the_category()) as $category) {
+            echo $category->cat_name . ' ' . "</span>";
         }
         ?>
 
