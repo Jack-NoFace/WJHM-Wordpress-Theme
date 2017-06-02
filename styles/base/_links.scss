@@ -45,3 +45,23 @@ a {
         }
     }
 }
+
+
+.link--fancy {
+    display: inline-block;
+
+    &:after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 1px;
+        background: $color-white;
+        transition: width .3s;
+    }
+
+    @include active-states() {
+        &:after {
+            width: 100%;
+        }
+    }
+}
