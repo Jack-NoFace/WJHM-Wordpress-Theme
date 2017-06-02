@@ -23,7 +23,7 @@
         }
         ?>
 
-        <span><?php echo the_date('F Y'); ?>  | 
+        <span class="color--grey"><?php echo get_the_date('F Y'); ?>  |
         <?php
         foreach((get_the_category()) as $category) {
             echo $category->cat_name . ' ' . "</span>";
