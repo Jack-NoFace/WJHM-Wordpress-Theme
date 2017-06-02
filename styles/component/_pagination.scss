@@ -5,4 +5,8 @@
 .pagination {
     text-align: right;
     padding: $spacing--normal;
+
+    span {
+        margin-left: $spacing--small;
+    }
 }
