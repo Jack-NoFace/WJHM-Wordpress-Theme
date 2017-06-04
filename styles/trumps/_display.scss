@@ -1,0 +1,10 @@
+/*///////////////
+/// DISPLAY
+*///////////////
+
+.display {
+    &--block { display: block; }
+    &--flex { display: flex; }
+    &--inline { display: inline; }
+    &--inlin-block { display: inline-block; }
+}
