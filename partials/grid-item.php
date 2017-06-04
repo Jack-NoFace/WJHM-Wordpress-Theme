@@ -11,24 +11,34 @@
     <div id="post-<?php the_ID(); ?>" class="grid-item__thumbnail background--primary pattern--<?php echo $pattern;?>">
     </div>
 
-    <div class="grid-item__details">
+    <div class="grid-item__details background--black-light color--white">
         <h2><?php the_title(); ?></h2>
 
         <?php
         $meta = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
+        $date = get_the_date('F Y');
 
-        if ($meta) {
-            echo "<hr>";
-            echo "<p>" . $meta . "</p>";
+        if ($meta || $date ) {
+            echo "<hr class='hr hr--grey'>";
+
+            if ($date) {
+                echo '<span class="color--grey display--block margin-bottom--tiny">' . $date  . ' | ';
+
+                foreach((get_the_category()) as $category) {
+                    echo $category->cat_name . ' ' . "</span>";
+                }
+
+            }
+
+            if ($meta) {
+                echo "<p>" . $meta . "</p>";
+            }
+
         }
         ?>
 
-        <span class="color--grey"><?php echo get_the_date('F Y'); ?>  |
-        <?php
-        foreach((get_the_category()) as $category) {
-            echo $category->cat_name . ' ' . "</span>";
-        }
-        ?>
+
+
 
     </div>
 
