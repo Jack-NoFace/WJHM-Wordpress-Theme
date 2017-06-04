@@ -9,3 +9,11 @@
     &--large { margin-left: $spacing--large; }
     &--huge { margin-left: $spacing--huge; }
 }
+
+.margin-bottom{
+    &--tiny { margin-bottom: $spacing--tiny; }
+    &--small { margin-bottom: $spacing--small; }
+    &--normal { margin-bottom: $spacing--normal; }
+    &--large { margin-bottom: $spacing--large; }
+    &--huge { margin-bottom: $spacing--huge; }
+}
