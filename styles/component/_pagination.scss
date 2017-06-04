@@ -5,8 +5,14 @@
 .pagination {
     text-align: right;
     padding: $spacing--normal;
+    background-color: $color-secondary;
 
     span {
         margin-left: $spacing--small;
+    }
+
+    .current {
+        margin-left: 0;
+        color: $color-primary;
     }
 }
