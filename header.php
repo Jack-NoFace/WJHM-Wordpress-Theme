@@ -21,14 +21,14 @@
 	<body <?php body_class(); ?>>
 
 			<!-- header -->
-			<header class="header clear background--primary" role="banner">
+			<header class="header display--flex background--primary" role="banner">
 
 					<div class="logo">
 						<a href="<?php echo home_url();?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="WhatJackHasMade Brand Logo"></a>
 					</div>
 
-					<input type="checkbox" name="hamburger" id="hamburger">
-					<label for="hamburger">Open/Close Mobile Navigation</label>
+					<input type="checkbox" name="hamburger" id="hamburger" class="display--hide">
+					<label for="hamburger" class="text--hide">Open/Close Mobile Navigation</label>
 
 					<!-- nav -->
 					<nav class="nav" role="navigation">

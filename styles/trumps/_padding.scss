@@ -9,3 +9,11 @@
     &--large { padding: $spacing--large; }
     &--huge { padding: $spacing--huge; }
 }
+
+.padding-right{
+    &--tiny { padding-right: $spacing--tiny; }
+    &--small { padding-right: $spacing--small; }
+    &--normal { padding-right: $spacing--normal; }
+    &--large { padding-right: $spacing--large; }
+    &--huge { padding-right: $spacing--huge; }
+}

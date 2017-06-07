@@ -16,29 +16,12 @@
 
         <?php
         $meta = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
-        $date = get_the_date('F Y');
 
-        if ($meta || $date ) {
+        if ($meta) {
             echo "<hr class='hr hr--grey'>";
-
-            if ($date) {
-                echo '<span class="color--grey display--block margin-bottom--tiny">' . $date  . ' | ';
-
-                foreach((get_the_category()) as $category) {
-                    echo $category->cat_name . ' ' . "</span>";
-                }
-
-            }
-
-            if ($meta) {
-                echo "<p>" . $meta . "</p>";
-            }
-
+            echo "<p>" . $meta . "</p>";
         }
         ?>
-
-
-
 
     </div>
 

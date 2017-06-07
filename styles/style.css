@@ -18,14 +18,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 /// VARS
 */
 /* Brand Colours */
-/*///////////////
+/*/////////////////////////////////////////
 /// ACTIVE STATES
 */
-/**
- * -----------------------------------------------------------------------------
- * $MEDIAQUERIES
- * -----------------------------------------------------------------------------
- */
+/*/////////////////////////////////////////
+/// MEDIA QUERIES
+*/
 /**
  * Mixins for defining media queries. These mixins should always be used
  * to define media query breakpoints.
@@ -33,11 +31,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
 /**
  * Only use in rare circumstances, favour `bp-min-width`.
  */
-/**
- * -----------------------------------------------------------------------------
- * $REM
- * -----------------------------------------------------------------------------
- */
+/*/////////////////////////////////////////
+/// REM
+*/
 /**
  * Useful mixin to assist with using REM units with a PX fallback.
  * Mixin is courtesy of Hugo Giraudel
@@ -462,7 +458,7 @@ article {
 /// BODY
 */
 body {
-  font-family: Lato, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
   background-color: #4a0e0b;
   display: flex;
@@ -511,6 +507,9 @@ header {
   padding: 16px 32px;
   font-weight: 700;
 }
+header > * {
+  align-self: center;
+}
 header label {
   display: none;
 }
@@ -522,10 +521,6 @@ header label {
   }
   header input[type="checkbox"] + label {
     display: block;
-    /* Hide the text. */
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
     cursor: pointer;
     position: absolute;
     top: 21px;
@@ -549,19 +544,11 @@ header label {
     padding-top: 32px;
   }
 }
-header nav, header .logo {
-  vertical-align: middle;
-}
 header .logo {
-  display: inline-block;
-  width: 50px;
+  min-width: 50px;
 }
-@media all and (min-width: 640px) {
-  header nav {
-    display: inline-block;
-    width: calc(100% - 60px);
-    text-align: right;
-  }
+header nav {
+  margin-left: auto;
 }
 @media all and (min-width: 640px) {
   header input[type="checkbox"] {
@@ -1093,8 +1080,19 @@ body.single-post {
 .display--inline {
   display: inline;
 }
-.display--inlin-block {
+.display--inline-block {
   display: inline-block;
+}
+.display--hide {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
 }
 
 /*///////////////
@@ -1151,6 +1149,25 @@ body.single-post {
   padding: 64px;
 }
 
+.padding-right--tiny {
+  padding-right: 8px;
+}
+.padding-right--small {
+  padding-right: 16px;
+}
+.padding-right--normal {
+  padding-right: 32px;
+}
+.padding-right--large {
+  padding-right: 48px;
+}
+.padding-right--huge {
+  padding-right: 64px;
+}
+
+/*///////////////
+/// PATTERN
+*/
 .pattern--1 {
   background-color: #ff4500;
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.9' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
@@ -1170,6 +1187,16 @@ body.single-post {
 .pattern--5 {
   background-color: #16a085;
   background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23ffffff' fill-opacity='0.85'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/*///////////////
+/// TEXT
+*/
+.text--hide {
+  /* Hide the text. */
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=style.css.map */
