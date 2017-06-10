@@ -3,7 +3,8 @@
 *///////////////
 
 .grid {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
 
     padding: $spacing--tiny;
 
@@ -34,12 +35,9 @@
 
     color: $color-black;
     border-radius: 6px;
-    background-color: $color-white;
 
     @include bp-min-width($bp-tablet) {
-        float: left;
-
-        width: 31%;
+        width: 48%;
     }
 
     @include bp-min-width($bp-desktop--small) {
@@ -93,11 +91,7 @@
     }
 
     &__details {
-        position: relative;
         z-index: 1;
-
-        display: flex;
-        flex-direction: column;
 
         height: calc(100% - 200px);
         padding: $spacing--small;
@@ -121,11 +115,26 @@
             margin-top: 0;
         }
 
+        /*
+        min-height: 440px;
+
+        @include bp-min-width($bp-tablet) {
+            min-height: 420px;
+        }
+
+        @include bp-min-width($bp-desktop--small) {
+            min-height: 280px;
+        }*/
+
         @supports(display: flex) {
             display: flex;
             flex-direction: column;
 
             justify-content: flex-start;
+        }
+
+        @supports(display: grid) {
+            height: auto;
         }
     }
 }

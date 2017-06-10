@@ -681,10 +681,10 @@ a {
   opacity: 0.2;
 }
 
-.link--fancy {
+.link--fancy, .current-menu-item {
   display: inline-block;
 }
-.link--fancy:after {
+.link--fancy:after, .current-menu-item:after {
   content: '';
   display: block;
   width: 0;
@@ -693,7 +693,11 @@ a {
   -webkit-transition: width .3s;
           transition: width .3s;
 }
-.link--fancy:hover:after, .link--fancy:focus:after, .link--fancy:active:after {
+.link--fancy:hover:after, .link--fancy:focus:after, .link--fancy:active:after, .current-menu-item:hover:after, .current-menu-item:focus:after, .current-menu-item:active:after {
+  width: 100%;
+}
+
+.current-menu-item:after {
   width: 100%;
 }
 
@@ -793,7 +797,13 @@ section h1 {
 /// CONTAINER
 */
 .grid {
-  display: block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
   padding: 8px;
 }
 @media all and (min-width: 640px) {
@@ -824,12 +834,10 @@ section h1 {
           transition: transform 0.1s ease-in-out;
   color: #121212;
   border-radius: 6px;
-  background-color: #FFFFFF;
 }
 @media all and (min-width: 640px) {
   .grid-item {
-    float: left;
-    width: 31%;
+    width: 48%;
   }
 }
 @media all and (min-width: 1024px) {
@@ -890,17 +898,7 @@ section h1 {
   }
 }
 .grid-item__details {
-  position: relative;
   z-index: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
   height: -webkit-calc(100% - 200px);
   height: calc(100% - 200px);
   padding: 16px;
@@ -909,6 +907,16 @@ section h1 {
   -webkit-flex: 1;
       -ms-flex: 1;
           flex: 1;
+        /*
+        min-height: 440px;
+
+        @include bp-min-width($bp-tablet) {
+            min-height: 420px;
+        }
+
+        @include bp-min-width($bp-desktop--small) {
+            min-height: 280px;
+        }*/
 }
 .grid-item__details span {
   margin-top: auto;
@@ -937,6 +945,11 @@ section h1 {
     -webkit-justify-content: flex-start;
         -ms-flex-pack: start;
             justify-content: flex-start;
+  }
+}
+@supports (display: grid) {
+  .grid-item__details {
+    height: auto;
   }
 }
 
@@ -1029,6 +1042,8 @@ section h1 {
 /// PAGINATION
 */
 .pagination {
+  margin-top: auto;
+  clear: both;
   text-align: right;
   padding: 32px;
   background-color: #111626;
