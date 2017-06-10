@@ -47,7 +47,7 @@ a {
 }
 
 
-.link--fancy {
+.link--fancy, .current-menu-item {
     display: inline-block;
 
     &:after {
@@ -63,5 +63,11 @@ a {
         &:after {
             width: 100%;
         }
+    }
+}
+
+.current-menu-item {
+    &:after {
+        width: 100%;
     }
 }
