@@ -12,4 +12,9 @@
 
 .padding-left{
     &--minute { padding-left: $spacing--tiny/2; }
+    &--tiny { padding-left: $spacing--tiny; }
+    &--small { padding-left: $spacing--small; }
+    &--normal { padding-left: $spacing--normal; }
+    &--large { padding-left: $spacing--large; }
+    &--huge { padding-left: $spacing--huge; }
 }

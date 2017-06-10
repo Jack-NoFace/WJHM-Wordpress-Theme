@@ -16,9 +16,8 @@
 
         <?php
         $meta = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
-        $date = get_the_date('F Y');
 
-        if ($meta || $date ) {
+        if ($meta) {
             echo "<hr class='hr hr--grey'>";
 
             if ($meta) {
@@ -40,9 +39,6 @@
 
         }
         ?>
-
-
-
 
     </div>
 

@@ -7,6 +7,10 @@ header {
 
     font-weight: 700;
 
+    & > * {
+        align-self: center;
+    }
+
     label {
         display: none;
     }
@@ -21,11 +25,6 @@ header {
 
             & + label {
                 display: block;
-
-                /* Hide the text. */
-                text-indent: 100%;
-                white-space: nowrap;
-                overflow: hidden;
 
                 cursor: pointer;
 
@@ -56,24 +55,12 @@ header {
         }
     }
 
-    nav, .logo {
-        vertical-align: middle;
-    }
-
     .logo {
-        display: inline-block;
-
-        width: 50px;
+        min-width: 50px;
     }
 
     nav {
-        @include bp-min-width($bp-tablet) {
-            display: inline-block;
-
-            width: calc(100% - 60px);
-
-            text-align: right;
-        }
+        margin-left: auto;
     }
 
     input[type="checkbox"] {
