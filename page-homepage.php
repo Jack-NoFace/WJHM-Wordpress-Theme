@@ -4,7 +4,7 @@
 
 $query = array(
 	'post_type' => 'post',
-	'posts_per_page' => 15,
+	'posts_per_page' => 25,
 	'paged' => $paged
 );
 

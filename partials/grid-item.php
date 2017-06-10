@@ -21,17 +21,21 @@
         if ($meta || $date ) {
             echo "<hr class='hr hr--grey'>";
 
-            if ($date) {
-                echo '<span class="color--grey display--block margin-bottom--tiny">' . $date  . ' | ';
-
-                foreach((get_the_category()) as $category) {
-                    echo $category->cat_name . ' ' . "</span>";
-                }
-
-            }
-
             if ($meta) {
                 echo "<p>" . $meta . "</p>";
+            }
+
+            if ($date) {
+                echo '<span class="color--grey display--block">' . $date  . ', ';
+
+                $categories = get_the_category();
+
+                if ( ! empty( $categories ) ) {
+                    echo esc_html( $categories[0]->name );
+                }
+
+                echo '</span>';
+
             }
 
         }

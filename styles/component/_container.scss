@@ -106,7 +106,12 @@
 
         flex: 1;
 
-        h2, h3 {
+        span {
+            margin-top: auto;
+            font-size: 0.8rem;
+        }
+
+        h2 {
             font-size: 1.3rem;
             text-transform: capitalize;
             margin: 0;

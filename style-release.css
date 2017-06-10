@@ -910,7 +910,11 @@ section h1 {
       -ms-flex: 1;
           flex: 1;
 }
-.grid-item__details h2, .grid-item__details h3 {
+.grid-item__details span {
+  margin-top: auto;
+  font-size: 0.8rem;
+}
+.grid-item__details h2 {
   font-size: 1.3rem;
   text-transform: capitalize;
   margin: 0;
@@ -1211,6 +1215,10 @@ body.single-post {
 }
 .padding--huge {
   padding: 64px;
+}
+
+.padding-left--minute {
+  padding-left: 4px;
 }
 
 .pattern--1 {
