@@ -4,6 +4,8 @@
 
 header {
     padding: $spacing--small $spacing--normal;
+    flex-direction: column;
+    justify-content: flex-start;
 
     font-weight: 700;
 
@@ -15,8 +17,11 @@ header {
         display: none;
     }
 
-    @include bp-max-width($bp-tablet) {
+    @include bp-min-width($bp-tablet) {
+        flex-direction: row;
+    }
 
+    @include bp-max-width($bp-tablet) {
         input[type="checkbox"] {
             width: 0;
             height: 0;
@@ -48,8 +53,6 @@ header {
 
             &:checked + label + nav {
                 display: block;
-
-                padding-top: $spacing--normal;
             }
 
         }
@@ -57,10 +60,16 @@ header {
 
     .logo {
         min-width: 50px;
+        margin-right: auto;
     }
 
     nav {
-        margin-left: auto;
+        margin-right: auto;
+
+        @include bp-min-width($bp-tablet) {
+            margin-left: auto;
+            margin-right: 0;
+        }
     }
 
     input[type="checkbox"] {
@@ -75,8 +84,9 @@ header {
         list-style: none;
     }
 
-    li {
+    li.link--fancy {
         margin-bottom: $spacing--small;
+        display: block;
 
         @include bp-min-width($bp-tablet) {
             display: inline-block;
