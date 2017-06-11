@@ -505,6 +505,8 @@ footer .list__item:nth-of-type(1) {
 */
 header {
   padding: 16px 32px;
+  flex-direction: column;
+  justify-content: flex-start;
   font-weight: 700;
 }
 header > * {
@@ -512,6 +514,11 @@ header > * {
 }
 header label {
   display: none;
+}
+@media all and (min-width: 640px) {
+  header {
+    flex-direction: row;
+  }
 }
 @media all and (max-width: 640px) {
   header input[type="checkbox"] {
@@ -541,14 +548,20 @@ header label {
   }
   header input[type="checkbox"]:checked + label + nav {
     display: block;
-    padding-top: 32px;
   }
 }
 header .logo {
   min-width: 50px;
+  margin-right: auto;
 }
 header nav {
-  margin-left: auto;
+  margin-right: auto;
+}
+@media all and (min-width: 640px) {
+  header nav {
+    margin-left: auto;
+    margin-right: 0;
+  }
 }
 @media all and (min-width: 640px) {
   header input[type="checkbox"] {
@@ -559,11 +572,12 @@ header ul {
   padding: 0;
   list-style: none;
 }
-header li {
+header li.link--fancy {
   margin-bottom: 16px;
+  display: block;
 }
 @media all and (min-width: 640px) {
-  header li {
+  header li.link--fancy {
     display: inline-block;
     margin-bottom: 0;
     margin-left: 16px;
@@ -735,23 +749,6 @@ section h1 {
 }
 .wrapper a:hover, .wrapper a:focus, .wrapper a:active {
   color: #121212;
-}
-
-/*///////////////
-/// RELATED
-*/
-.related {
-  margin-top: 4.5rem;
-}
-.related section {
-  padding: 0;
-}
-.related__thumbnail {
-  height: 200px;
-}
-.related:after {
-  content: "";
-  clear: both;
 }
 
 /*///////////////
@@ -1038,9 +1035,6 @@ body.single-post {
 }
 
 /*///////////////
-/// THUMBNAIL
-*/
-/*///////////////
 /// BACKGROUND
 */
 .background--primary {
@@ -1098,12 +1092,6 @@ body.single-post {
 .display--flex {
   display: flex;
 }
-.display--inline {
-  display: inline;
-}
-.display--inline-block {
-  display: inline-block;
-}
 .display--hide {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);
@@ -1119,20 +1107,8 @@ body.single-post {
 /*///////////////
 /// MARGIN
 */
-.margin-left--tiny {
-  margin-left: 8px;
-}
-.margin-left--small {
-  margin-left: 16px;
-}
 .margin-left--normal {
   margin-left: 32px;
-}
-.margin-left--large {
-  margin-left: 48px;
-}
-.margin-left--huge {
-  margin-left: 64px;
 }
 
 .margin-bottom--tiny {
@@ -1154,6 +1130,9 @@ body.single-post {
 /*///////////////
 /// PADDING
 */
+.padding--none {
+  padding: 0;
+}
 .padding--tiny {
   padding: 8px;
 }

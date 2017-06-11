@@ -3,11 +3,7 @@
 *///////////////
 
 .margin-left{
-    &--tiny { margin-left: $spacing--tiny; }
-    &--small { margin-left: $spacing--small; }
     &--normal { margin-left: $spacing--normal; }
-    &--large { margin-left: $spacing--large; }
-    &--huge { margin-left: $spacing--huge; }
 }
 
 .margin-bottom{

@@ -5,8 +5,6 @@
 .display {
     &--block { display: block; }
     &--flex { display: flex; }
-    &--inline { display: inline; }
-    &--inline-block { display: inline-block; }
 
     &--hide {
         position: absolute !important;

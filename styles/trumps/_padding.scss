@@ -3,6 +3,7 @@
 *///////////////
 
 .padding{
+    &--none { padding: 0; }
     &--tiny { padding: $spacing--tiny; }
     &--small { padding: $spacing--small; }
     &--normal { padding: $spacing--normal; }
