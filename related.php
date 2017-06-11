@@ -27,7 +27,7 @@
 
             <h2>Related Posts</h2>
 
-            <section class="grid">
+            <section class="grid padding--none">
 
             <?php while( $my_query->have_posts() ) {
             $my_query->the_post();?>
