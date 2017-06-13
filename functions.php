@@ -35,6 +35,7 @@ if (function_exists('add_theme_support'))
     add_image_size('mobile--large', 640, '', true);
     add_image_size('mobile', 480, '', true);
     add_image_size('mobile--small', 320, '', true);
+    add_image_size('tiny', 60, 60, true);
 
     // Enables post and comment RSS feed links to head
     add_theme_support('automatic-feed-links');
