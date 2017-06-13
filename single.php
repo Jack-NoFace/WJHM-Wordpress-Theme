@@ -6,20 +6,27 @@
 
 			<div class="wrapper post">
 
-			<!-- post title -->
-			<h1><?php the_title(); ?></h1>
-			<!-- /post title -->
+				<div class="post__meta text-align--center">
 
-			<span class="color-grey"><?php the_author(); ?> | </span>
+					<div>
+						<picture>
+							<source srcset="<?php echo get_template_directory_uri(); ?>/img/jack-davies-designer.webp" type="image/webp">
+							<img class="border--circle" src="<?php echo get_template_directory_uri(); ?>/img/jack-davies-designer.jpg">
+						</picture>
+					</div>
 
-			<?php
-			$date = the_date('jS F Y');
+					<div>
+						<h1><?php the_title(); ?></h1>
+						<?php $date = the_date('jS F Y'); if ($date) { echo '<span class="color-grey">Published: ' . $date . '</span>'; } ?>
+						<?php $categories = get_the_category();	if ( ! empty( $categories ) ) { echo '<span class="color-grey"> | ' . esc_html( $categories[0]->name ) . '</span>'; } ?>
+					</div>
 
-			if ($date) { ?>
-				<span class="color-grey">Published: <?php echo $date; ?></span>
-			<?php
-			}
-			?>
+					<div>
+						<?php the_post_thumbnail('tiny', ['class' => 'border--circle']); ?>
+					</div>
+
+
+				</div>
 
 			<?php the_content(); // Dynamic Content ?>
 
