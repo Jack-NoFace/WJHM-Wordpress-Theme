@@ -29,3 +29,22 @@ body.single-post {
         }
     }
 }
+
+.post__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        margin-bottom: $spacing--tiny;
+    }
+
+    picture {
+        display: none;
+
+        @include bp-min-width($bp-tablet) {
+            display: inline;
+        }
+    }
+
+}
