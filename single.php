@@ -8,11 +8,15 @@
 
 				<div class="post__meta text-align--center">
 
-					<div>
+					<div class="post__meta__image">
 						<picture>
 							<source srcset="<?php echo get_template_directory_uri(); ?>/img/jack-davies-designer.webp" type="image/webp">
-							<img class="border--circle" src="<?php echo get_template_directory_uri(); ?>/img/jack-davies-designer.jpg">
+							<a href="/about-me/"><img class="border--circle" src="<?php echo get_template_directory_uri(); ?>/img/jack-davies-designer.jpg"></a>
 						</picture>
+					</div>
+
+					<div class="post__meta__thumbnail post__meta__image">
+						<?php the_post_thumbnail('tiny', ['class' => 'border--circle']); ?>
 					</div>
 
 					<div>
@@ -20,11 +24,6 @@
 						<?php $date = the_date('jS F Y'); if ($date) { echo '<span class="color-grey">Published: ' . $date . '</span>'; } ?>
 						<?php $categories = get_the_category();	if ( ! empty( $categories ) ) { echo '<span class="color-grey"> | ' . esc_html( $categories[0]->name ) . '</span>'; } ?>
 					</div>
-
-					<div>
-						<?php the_post_thumbnail('tiny', ['class' => 'border--circle']); ?>
-					</div>
-
 
 				</div>
 
