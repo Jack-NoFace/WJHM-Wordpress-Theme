@@ -22,7 +22,7 @@ body.single-post {
     > .related { margin-top: 4.5rem; }
 
     @include bp-min-width($bp-tablet) {
-        & > *:not(.ignore):not(.post__meta) {
+        & > *:not(.ignore):not(.post__meta), picture img {
             max-width: 764px;
             margin-left: auto;
             margin-right: auto;

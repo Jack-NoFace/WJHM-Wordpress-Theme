@@ -93,6 +93,13 @@ add_action( 'admin_init', 'wpdocs_theme_add_editor_styles' );
 
 function clean_header(){ wp_deregister_script( 'comment-reply' ); } add_action('init','clean_header');
 
+// Load Modernizr script
+function modernizr_script()
+{
+    wp_register_script('scriptname', get_template_directory_uri() . 'scripts/modernizr-custom.js', array(''), '1.0.0');
+    wp_enqueue_script('scriptname');
+}
+
 
 // Register HTML5 Blank Navigation
 function register_html5_menu()
@@ -266,6 +273,7 @@ function html5blankcomments($comment, $args, $depth)
 // Add Actions
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
 add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
+add_action('wp_enqueue_scripts', 'modernizr_script'); // Add Theme Stylesheet
 add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
@@ -357,8 +365,6 @@ function wpt_remove_menus(){
 
 add_action( 'admin_menu', 'wpt_remove_menus' );
 
-
-
 add_action( 'init', 'wptuts_buttons' );
 function wptuts_buttons() {
     add_filter( "mce_external_plugins", "wptuts_add_buttons" );
@@ -369,12 +375,14 @@ function wptuts_add_buttons( $plugin_array ) {
     return $plugin_array;
 }
 function wptuts_register_buttons( $buttons ) {
-    array_push( $buttons, 'youtube' ); // dropcap', 'recentposts
+    array_push( $buttons, 'youtube', 'webp' ); // dropcap', 'recentposts
     return $buttons;
 }
 
-
-
-
+function cc_mime_types($mimes) {
+  $mimes['webp'] = 'image/webp';
+  return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
 
 ?>

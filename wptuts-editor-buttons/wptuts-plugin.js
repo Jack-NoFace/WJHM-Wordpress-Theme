@@ -18,9 +18,9 @@
             user_selected_images[type] = first.url;
 
             // If both images have been selected, add shortcode
-            if (user_selected_images.new) {
+            if (user_selected_images.webp && user_selected_images.fallback) {
                 var selected_text = ed.selection.getContent();
-                ed.execCommand('mceInsertContent', false, '<section class="hero section section--block section--image" style="background-image:url(' + user_selected_images.new + ');">' + '<div class="section__content">' + selected_text + '</div>' + '</section>');
+                ed.execCommand('mceInsertContent', false, '<picture><source srcset="' + user_selected_images.webp + '" type="image/webp"><img src="' + user_selected_images.fallback + '"></picture>');
             }
         });
 
@@ -38,19 +38,7 @@
         */
         init : function(ed, url) {
 
-            ed.addButton('showrecent', {
-                title : 'Add recent posts shortcode',
-                cmd : 'showrecent',
-                image : url + '/test2.png'
-            });
-
-            ed.addButton('paragraph', {
-                title : 'Add paragraph container',
-                cmd : 'paragraph',
-                image : url + '/test2.png'
-            });
-
-            ed.addButton('addimage', {
+            ed.addButton('webp', {
                 title: 'Custom Image',
                 cmd : 'addimage',
                 image : url + '/section.png'
@@ -65,8 +53,10 @@
             ed.addCommand('addimage', function() {
                 //Erase any old data
                 user_selected_images = {};
-                //Opens first
-                open_media_window("Select new photo", "new", ed);
+                //Opens Original
+                open_media_window("Select WebP Image", "webp", ed);
+                //Opens Fallback
+                open_media_window("Select Fallback Image", "fallback", ed);
             });
 
             ed.addCommand('youtube', function() {
