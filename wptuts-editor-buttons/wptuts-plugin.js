@@ -41,7 +41,7 @@
             ed.addButton('webp', {
                 title: 'Custom Image',
                 cmd : 'addimage',
-                image : url + '/section.png'
+                image : url + '/webp.png'
             });
 
             ed.addButton('youtube', {
