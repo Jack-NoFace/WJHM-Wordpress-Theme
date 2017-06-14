@@ -1,20 +1,27 @@
 <?php get_header(); ?>
 
-	<main role="main" class="padding--huge background--white">
+	<main role="main" class="background--white">
 		<!-- section -->
 		<section>
 
 		<?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
-			<!-- article -->
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-				<h1><?php the_title(); ?></h1>
+		<div class="wrapper post">
 
-				<?php the_content(); ?>
+		<div class="text-align--center padding--normal">
+			<?php the_post_thumbnail('mobile--small', ['class' => 'border--circle']); ?>
+		</div>
 
-			</article>
-			<!-- /article -->
+		<div>
+			<h1 class="color--black padding--none"><?php the_title(); ?></h1>
+		</div>
+
+		<?php the_content(); // Dynamic Content ?>
+
+		<?php get_template_part( 'related' ); ?>
+
+		</div>
 
 		<?php endwhile; ?>
 
