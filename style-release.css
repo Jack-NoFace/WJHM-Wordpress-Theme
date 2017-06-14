@@ -1122,13 +1122,19 @@ body.single-post {
 .post__meta h1 {
   margin-bottom: 8px;
 }
-.post__meta picture {
+.post__meta__image {
   display: none;
 }
 @media all and (min-width: 640px) {
-  .post__meta picture {
+  .post__meta__image {
     display: inline;
   }
+}
+.post__meta__thumbnail {
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2;
 }
 
 /*///////////////
