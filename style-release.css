@@ -771,7 +771,7 @@ section h1 {
 /// WRAPPER
 */
 .wrapper {
-  max-width: 764px;
+  max-width: 914px;
   margin: 0 auto;
   padding: 32px;
   background-color: #FFFFFF;
@@ -1097,8 +1097,8 @@ body.single-post {
   margin-top: 4.5rem;
 }
 @media all and (min-width: 640px) {
-  .post > *:not(img):not(figure):not(.ignore) {
-    max-width: 800px;
+  .post > *:not(.ignore):not(.post__meta) {
+    max-width: 764px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -1117,6 +1117,7 @@ body.single-post {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 4.5rem;
 }
 .post__meta h1 {
   margin-bottom: 8px;
