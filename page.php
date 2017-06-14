@@ -9,12 +9,8 @@
 
 		<div class="wrapper post page">
 
-			<div class="page__meta">
-
-				<div class="text-align--center padding--normal page__meta__thumbnail">
-					<?php the_post_thumbnail('mobile--small', ['class' => 'border--circle']); ?>
-				</div>
-
+			<div class="text-align--center padding--normal page__meta__thumbnail">
+				<?php the_post_thumbnail('mobile--small', ['class' => 'border--circle']); ?>
 			</div>
 
 			<div>
