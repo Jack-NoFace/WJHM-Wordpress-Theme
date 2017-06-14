@@ -19,7 +19,7 @@
 						<?php the_post_thumbnail('tiny', ['class' => 'border--circle']); ?>
 					</div>
 
-					<div>
+					<div class="padding--normal">
 						<h1><?php the_title(); ?></h1>
 						<?php $date = the_date('jS F Y'); if ($date) { echo '<span class="color-grey">Published: ' . $date . '</span>'; } ?>
 						<?php $categories = get_the_category();	if ( ! empty( $categories ) ) { echo '<span class="color-grey"> | ' . esc_html( $categories[0]->name ) . '</span>'; } ?>
