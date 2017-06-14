@@ -1057,6 +1057,7 @@ body.single-post {
   }
 }
 .post__meta__thumbnail {
+  max-width: 60px;
   order: 2;
 }
 

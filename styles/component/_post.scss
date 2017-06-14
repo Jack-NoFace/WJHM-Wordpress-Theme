@@ -49,6 +49,7 @@ body.single-post {
     }
 
     &__thumbnail {
+        max-width: 60px;
         order: 2;
     }
 }
