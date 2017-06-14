@@ -39,7 +39,7 @@
         init : function(ed, url) {
 
             ed.addButton('webp', {
-                title: 'Custom Image',
+                title: 'WebP Image',
                 cmd : 'addimage',
                 image : url + '/webp.png'
             });
