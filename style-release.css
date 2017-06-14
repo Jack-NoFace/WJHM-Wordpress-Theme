@@ -1040,6 +1040,13 @@ section h1 {
 }
 
 /*///////////////
+/// PAGE
+*/
+.page__meta__thumbnail {
+  max-width: 200px;
+}
+
+/*///////////////
 /// PAGINATION
 */
 .pagination {

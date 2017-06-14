@@ -7,19 +7,23 @@
 		<?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
 
-		<div class="wrapper post">
+		<div class="wrapper post page">
 
-		<div class="text-align--center padding--normal">
-			<?php the_post_thumbnail('mobile--small', ['class' => 'border--circle']); ?>
-		</div>
+			<div class="page__meta">
 
-		<div>
-			<h1 class="color--black padding--none"><?php the_title(); ?></h1>
-		</div>
+				<div class="text-align--center padding--normal page__meta__thumbnail">
+					<?php the_post_thumbnail('mobile--small', ['class' => 'border--circle']); ?>
+				</div>
 
-		<?php the_content(); // Dynamic Content ?>
+			</div>
 
-		<?php get_template_part( 'related' ); ?>
+			<div>
+				<h1 class="color--black padding--none"><?php the_title(); ?></h1>
+			</div>
+
+			<?php the_content(); // Dynamic Content ?>
+
+			<?php get_template_part( 'related' ); ?>
 
 		</div>
 
