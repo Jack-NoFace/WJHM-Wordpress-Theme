@@ -25,8 +25,10 @@
                 echo "<p>" . $meta . "</p>";
             }
 
-            if ($date) {
-                echo '<span class="color--grey display--block">' . $date  . ', ';
+            $minutes = do_shortcode('[rt_reading_time label="Reading Time:" postfix="minutes"]');
+
+            if ($minutes) {
+                echo '<span class="color--grey display--block">' . $minutes . ', ';
 
                 $categories = get_the_category();
 
