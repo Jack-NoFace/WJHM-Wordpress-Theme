@@ -474,7 +474,11 @@ pre {
   word-wrap: break-word;
   background-color: #111626;
   color: #FFFFFF;
-  padding: 0 32px 32px;
+  padding: 48px;
+}
+
+pre, xmp, code {
+  font-size: 16px;
 }
 
 /*///////////////

@@ -8,5 +8,9 @@ pre {
 
     background-color: $color-secondary;
     color: $color-white;
-    padding: 0 $spacing--normal $spacing--normal;
+    padding: $spacing--large;
+}
+
+pre, xmp, code {
+    font-size: 16px;
 }
