@@ -33,7 +33,8 @@ module.exports = function(grunt) {
                 },
                 files: {                         // Dictionary of files
                     'styles/style.css': 'styles/main.scss',
-                    'styles/admin--login.css': 'admin--login.scss'  // 'destination': 'source'
+                    'styles/admin--login.css': 'admin--login.scss',  // 'destination': 'source'
+                    'pattern-library/src/assets/toolkit/styles/toolkit.scss': 'styles/main.scss'  // 'destination': 'source'
                 }
             }
         },
