@@ -27,7 +27,7 @@ function rest_blogs($data)
     if ($loop) {
     	$insightItems = array();
 
-		while ($loop->have_posts()): $loop->the_post();
+        while ($loop->have_posts()): $loop->the_post();
 			array_push(
 				$insightItems, array(
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
@@ -35,7 +35,8 @@ function rest_blogs($data)
 					'image' => get_the_post_thumbnail_url(get_the_ID(), 'mobile'),
 					'link' => get_the_permalink(),
 					'title' => get_the_title(),
-					'content' => get_the_content()
+                    'content' => get_the_content(),
+                    'slug' => get_post_field('post_name')
 				)
 			);
 		endwhile;
