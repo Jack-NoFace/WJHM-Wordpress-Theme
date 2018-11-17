@@ -320,11 +320,6 @@ remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
 
-<<<<<<< HEAD
 include_once('includes/rest_blogs.php');
-=======
-add_action( 'admin_menu', 'wpt_remove_menus' );
-
->>>>>>> 5821279970a07b5f55083321db7b18acedd139c6
 
 ?>
