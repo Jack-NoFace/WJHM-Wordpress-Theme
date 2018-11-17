@@ -319,70 +319,7 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
-// Load theme logo on login page
-function my_login_logo() { ?>
-    <style type="text/css">
-        #login h1 a, .login h1 a {
-            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/img/logo.png);
-        }
-    </style>
-<?php }
 
-add_action( 'login_enqueue_scripts', 'my_login_logo' );
-
-// Bespoke admin stylesheet on login page
-function my_login_stylesheet() {
-    wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/admin--login.min.css' );
-}
-
-add_action( 'login_enqueue_scripts', 'my_login_stylesheet' );
-
-// Include blog name in footer of admin dashboard page
-function wpse_edit_footer() {
-    add_filter( 'admin_footer_text', 'wpse_edit_text', 11 );
-}
-
-function wpse_edit_text($content) {
-    return bloginfo( 'name' );
-}
-
-add_action( 'admin_init', 'wpse_edit_footer' );
-
-// Remove admin navigation in dashboard
-function wpt_remove_menus(){
-    //remove_menu_page( 'index.php' );                  //Dashboard
-    //remove_menu_page( 'edit.php' );                   //Posts
-    //remove_menu_page( 'upload.php' );                 //Media
-    //remove_menu_page( 'edit.php?post_type=page' );    //Pages
-    //remove_menu_page( 'edit-comments.php' );          //Comments
-
-    //remove_menu_page( 'themes.php' );                 //Appearance
-    //remove_menu_page( 'plugins.php' );                //Plugins
-    //remove_menu_page( 'users.php' );                  //Users
-    //remove_menu_page( 'tools.php' );                  //Tools
-    //remove_menu_page( 'options-general.php' );        //Settings
-}
-
-add_action( 'admin_menu', 'wpt_remove_menus' );
-
-add_action( 'init', 'wptuts_buttons' );
-function wptuts_buttons() {
-    add_filter( "mce_external_plugins", "wptuts_add_buttons" );
-    add_filter( 'mce_buttons', 'wptuts_register_buttons' );
-}
-function wptuts_add_buttons( $plugin_array ) {
-    $plugin_array['wptuts'] = get_template_directory_uri() . '/wptuts-editor-buttons/wptuts-plugin.js';
-    return $plugin_array;
-}
-function wptuts_register_buttons( $buttons ) {
-    array_push( $buttons, 'youtube', 'webp' ); // dropcap', 'recentposts
-    return $buttons;
-}
-
-function cc_mime_types($mimes) {
-  $mimes['webp'] = 'image/webp';
-  return $mimes;
-}
-add_filter('upload_mimes', 'cc_mime_types');
+include_once('includes/rest_blogs.php');
 
 ?>
