@@ -28,15 +28,31 @@ function rest_blogs($data)
     	$insightItems = array();
 
         while ($loop->have_posts()): $loop->the_post();
+            $primary_cat_id = get_post_meta(get_the_ID(), '_yoast_wpseo_primary_product_cat', true);
+            if ($primary_cat_id) {
+                $product_cat = get_term($primary_cat_id, 'product_cat');
+                if (isset($product_cat->name)) {
+                    $category = $product_cat->slug;
+                }
+            } else {
+                $categories = get_the_category();
+                if (!empty($categories)) {
+                    $category =  esc_html($categories[0]->slug);
+                }
+            }
+
+
 			array_push(
 				$insightItems, array(
+                    'category' => $category,
+                    'content' => get_the_content(),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
                     'id' => get_the_ID(),
-					'image' => get_the_post_thumbnail_url(get_the_ID(), 'mobile'),
+                    'image' => get_the_post_thumbnail_url(get_the_ID(), 'mobile'),
+					'imageFull' => get_the_post_thumbnail_url(),
 					'link' => get_the_permalink(),
-					'title' => get_the_title(),
-                    'content' => get_the_content(),
-                    'slug' => get_post_field('post_name')
+                    'slug' => get_post_field('post_name'),
+                    'title' => get_the_title()
 				)
 			);
 		endwhile;
