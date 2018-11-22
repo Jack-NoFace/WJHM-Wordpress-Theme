@@ -41,6 +41,23 @@ function rest_blogs($data)
                 }
             }
 
+            $related = get_field('related_posts');
+            $related_array = null;
+
+            if ($related) {
+                $related_array = [];
+                foreach( $related as $p):
+                    $id = $p->ID;
+                    $related_array[] = (object) array(
+                        'excerpt' => get_post_meta($id, '_yoast_wpseo_metadesc', true),
+                        'id' => $id,
+                        'image' => get_the_post_thumbnail_url($id, 'mobile'),
+                        'slug' => get_post_field('post_name', $id)
+                    );
+                endforeach;
+                wp_reset_postdata();
+            }
+
 
 			array_push(
 				$insightItems, array(
@@ -50,7 +67,8 @@ function rest_blogs($data)
                     'id' => get_the_ID(),
                     'image' => get_the_post_thumbnail_url(get_the_ID(), 'mobile'),
 					'imageFull' => get_the_post_thumbnail_url(),
-					'link' => get_the_permalink(),
+                    'link' => get_the_permalink(),
+                    'related' => $related_array,
                     'slug' => get_post_field('post_name'),
                     'title' => get_the_title()
 				)
