@@ -1,7 +1,7 @@
 <?php
 /* Register function to run at rest_api_init hook */
 add_action('rest_api_init', function () {
-    /* Setup siteurl/wp-json/posts/v2/all */
+    /* Setup siteurl/wp-json/inspiration/v2/all */
     register_rest_route('inspiration/v2', '/all', array(
         'methods' => 'GET',
         'callback' => 'rest_inspirations',
@@ -44,6 +44,7 @@ function rest_inspirations($data)
             $the_content = get_the_content();
             array_push(
                 $inspirationItems, array(
+                    'category' => get_the_category(),
                     'content' => $the_content,
                     'date' => get_the_date('c'),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
@@ -60,7 +61,7 @@ function rest_inspirations($data)
                     'link' => get_the_permalink(),
                     'seoTitle' => get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
                     'slug' => get_post_field('post_name'),
-                    'title' => get_the_title(),
+                    'title' => html_entity_decode(get_the_title()),
                 )
             );
         endwhile;

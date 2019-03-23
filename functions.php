@@ -1,6 +1,6 @@
 <?php
 /**
- * Fill My Diary Theme
+ * WhatJackHasMade WordPress Theme
  */
 
 if (!class_exists('Timber')) {
