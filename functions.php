@@ -1,325 +1,259 @@
 <?php
-/*
- *  Author: Todd Motto | @toddmotto
- *  URL: html5blank.com | @html5blank
- *  Custom functions, support, custom post types and more.
+/**
+ * Fill My Diary Theme
  */
 
-/*------------------------------------*\
-	External Modules/Files
-\*------------------------------------*/
+if (!class_exists('Timber')) {
+    add_action('admin_notices', function () {
+        echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url(admin_url('plugins.php#timber')) . '">' . esc_url(admin_url('plugins.php')) . '</a></p></div>';
+    });
 
-// Load any external files you have here
+    add_filter('template_include', function ($template) {
+        return get_stylesheet_directory() . '/static/no-timber.html';
+    });
 
-/*------------------------------------*\
-	Theme Support
-\*------------------------------------*/
-
-if (!isset($content_width))
-{
-    $content_width = 900;
-}
-
-if (function_exists('add_theme_support'))
-{
-    // Add Menu Support
-    add_theme_support('menus');
-
-    // Add Thumbnail Theme Support
-    add_theme_support('post-thumbnails');
-    add_image_size('mobile', 480, '', true);
-    add_image_size('mobile--small', 320, '', true);
-    add_image_size('tiny', 60, 60, true);
-
-    // Enables post and comment RSS feed links to head
-    add_theme_support('automatic-feed-links');
-
-    // Localisation Support
-    load_theme_textdomain('html5blank', get_template_directory() . '/languages');
-}
-
-/*------------------------------------*\
-	Functions
-\*------------------------------------*/
-
-// HTML5 Blank navigation
-function html5blank_nav()
-{
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'header-menu',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
-}
-
-// Add classes to navigation items
-function add_classes_menu($classes, $item, $args) {
-  $classes[] = 'link--fancy';
-  return $classes;
-}
-add_filter('nav_menu_css_class','add_classes_menu',1,3);
-
-
-// Load HTML5 Blank styles
-function html5blank_styles()
-{
-    wp_register_style('html5blank', get_template_directory_uri() . '/style.min.css', array(), '1.0', 'all');
-    wp_enqueue_style('html5blank'); // Enqueue it!
+    return;
 }
 
 /**
- * Registers an editor stylesheet for the theme.
+ * Sets the directories (inside your theme) to find .twig files
  */
-function wpdocs_theme_add_editor_styles() {
-    add_editor_style( 'mce.css' );
-}
-add_action( 'admin_init', 'wpdocs_theme_add_editor_styles' );
+Timber::$dirname = array('components');
 
+/**
+ * By default, Timber does NOT autoescape values. Want to enable Twig's autoescape?
+ * No prob! Just set this value to true
+ */
+Timber::$autoescape = false;
 
-function clean_header(){ wp_deregister_script( 'comment-reply' ); } add_action('init','clean_header');
-
-// Load Modernizr script
-function modernizr_script()
+/**
+ * We're going to configure our theme inside of a subclass of Timber\Site
+ * You can move this to its own file and include here via php's include("MySite.php")
+ */
+class StarterSite extends Timber\Site
 {
-    wp_register_script('scriptname', get_template_directory_uri() . 'scripts/modernizr-custom.js', array(''), '1.0.0');
-    wp_enqueue_script('scriptname');
-}
-
-
-// Register HTML5 Blank Navigation
-function register_html5_menu()
-{
-    register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation
-        'sidebar-menu' => __('Sidebar Menu', 'html5blank'), // Sidebar Navigation
-        'extra-menu' => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
-    ));
-}
-
-// Remove the <div> surrounding the dynamic navigation to cleanup markup
-function my_wp_nav_menu_args($args = '')
-{
-    $args['container'] = false;
-    return $args;
-}
-
-// Remove Injected classes, ID's and Page ID's from Navigation <li> items
-function my_css_attributes_filter($var)
-{
-    return is_array($var) ? array() : '';
-}
-
-// Remove invalid rel attribute values in the categorylist
-function remove_category_rel_from_category_list($thelist)
-{
-    return str_replace('rel="category tag"', 'rel="tag"', $thelist);
-}
-
-// Add page slug to body class, love this - Credit: Starkers Wordpress Theme
-function add_slug_to_body_class($classes)
-{
-    global $post;
-    if (is_home()) {
-        $key = array_search('blog', $classes);
-        if ($key > -1) {
-            unset($classes[$key]);
-        }
-    } elseif (is_page()) {
-        $classes[] = sanitize_html_class($post->post_name);
-    } elseif (is_singular()) {
-        $classes[] = sanitize_html_class($post->post_name);
+    /** Add timber support. */
+    public function __construct()
+    {
+        add_action('after_setup_theme', array($this, 'theme_supports'));
+        add_action('after_setup_theme', array($this, 'legacy_functions'));
+        add_filter('timber_context', array($this, 'add_to_context'));
+        add_filter('allowed_block_types', array($this, 'misha_allowed_block_types'));
+        add_filter('upload_mimes', array($this, 'cc_mime_types'));
+        add_action('init', array($this, 'register_blocks'));
+        add_action('init', array($this, 'register_post_types'));
+        add_action('init', array($this, 'register_taxonomies'));
+        add_action('init', array($this, 'register_my_menu'));
+        add_action('wp_enqueue_scripts', array($this, 'loadScripts'));
+        add_action('wp_enqueue_scripts', array($this, 'loadStyles'));
+        add_action('get_footer', array($this, 'footerStyles'));
+        add_action('acf/init', array($this, 'my_acf_init'));
+        add_image_size('ratio', 300, 300, true);
+        add_image_size('featured_xs', 350, 175, true);
+        add_image_size('featured_sm', 450, 225, true);
+        add_image_size('featured_md', 768, 384, true);
+        add_image_size('featured_lg', 1300, 640, true);
+        add_image_size('featured_xl', 1920, 1080, true);
+        remove_action('wp_head', 'print_emoji_detection_script', 7);
+        remove_action('wp_print_styles', 'print_emoji_styles');
+        remove_filter('the_content', 'wpautop');
+        remove_filter('the_excerpt', 'wpautop');
+        add_filter('post_thumbnail_html', array($this, 'remove_image_size_attributes'));
+        add_filter('image_send_to_editor', array($this, 'remove_image_size_attributes'));
+        apply_filters('rocket_cache_reject_wp_rest_api', false);
+        parent::__construct();
     }
 
-    return $classes;
-}
+    public function loadScripts()
+    {
+    }
 
-// Remove wp_head() injected Recent Comment styles
-function my_remove_recent_comments_style()
-{
-    global $wp_widget_factory;
-    remove_action('wp_head', array(
-        $wp_widget_factory->widgets['WP_Widget_Recent_Comments'],
-        'recent_comments_style'
-    ));
-}
+    public function loadStyles()
+    {
+    }
 
-// Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
-function html5wp_pagination()
-{
-    global $wp_query;
-    $big = 999999999;
-    echo paginate_links(array(
-        'base' => str_replace($big, '%#%', get_pagenum_link($big)),
-        'format' => '?paged=%#%',
-        'current' => max(1, get_query_var('paged')),
-        'total' => $wp_query->max_num_pages
-    ));
-}
+    public function footerStyles()
+    {
+    }
 
-// Add classes to pagination
-function pagination_link_classes() {
-    return 'class="link--fancy"';
-}
+    /** This is where you can register custom post types. */
+    public function register_post_types()
+    {
+        register_taxonomy_for_object_type('category', 'inspiration');
+        register_taxonomy_for_object_type('post_tag', 'inspiration');
+        register_post_type('inspiration',
+            array(
+                'labels' => array(
+                    'name' => __('Inspiration', 'inspiration'),
+                    'singular_name' => __('Inspiration', 'inspiration'),
+                    'add_new' => __('Add New', 'inspiration'),
+                    'add_new_item' => __('Add New Inspiration', 'inspiration'),
+                    'edit' => __('Edit', 'inspiration'),
+                    'edit_item' => __('Edit Inspiration', 'inspiration'),
+                    'new_item' => __('New Inspiration', 'inspiration'),
+                    'view' => __('View Inspiration', 'inspiration'),
+                    'view_item' => __('View Inspiration', 'inspiration'),
+                    'search_items' => __('Search Inspiration', 'inspiration'),
+                    'not_found' => __('No Inspirations found', 'inspiration'),
+                    'not_found_in_trash' => __('No Inspirations found in Trash', 'inspiration'),
+                ),
+                'public' => true,
+                'hierarchical' => true,
+                'has_archive' => true,
+                'supports' => array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ),
+                'show_in_rest' => true,
+                'menu_icon' => 'dashicons-format-status',
+                'can_export' => true,
+                'taxonomies' => array(
+                    'post_tag',
+                    'category',
+                ),
+            ));
+    }
 
-add_filter('next_posts_link_attributes', 'pagination_link_classes');
-add_filter('previous_posts_link_attributes', 'pagination_link_classes');
+    public function register_my_menu()
+    {
+        register_nav_menus(array(
+            'primary' => 'Primary Menu',
+            'footer_one' => 'First Footer Menu',
+            'footer_two' => 'Second Footer Menu',
+            'footer_three' => 'Third Footer Menu',
+            'footer_four' => 'Fourth Footer Menu',
+            'secondary' => 'Secondary Menu',
+        ));
+    }
 
-// Custom View Article link to Post
-function html5_blank_view_article($more)
-{
-    global $post;
-}
+    public function register_blocks()
+    {
+        if (function_exists('acf_register_block')) {
 
-// Remove Admin bar
-function remove_admin_bar()
-{
-    return false;
-}
+            $blockies = array('hero');
+            $blockiesIcons = array('align-center');
 
-// Remove 'text/css' from our enqueued stylesheet
-function html5_style_remove($tag)
-{
-    return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
-}
+            $blockies = array_combine($blockies, $blockiesIcons);
 
-// Remove thumbnail width and height dimensions that prevent fluid images in the_thumbnail
-function remove_thumbnail_dimensions( $html )
-{
-    $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
-    return $html;
-}
-
-// Custom Gravatar in Settings > Discussion
-function html5blankgravatar ($avatar_defaults)
-{
-    $myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
-    $avatar_defaults[$myavatar] = "Custom Gravatar";
-    return $avatar_defaults;
-}
-
-// Threaded Comments
-function enable_threaded_comments()
-{
-    if (!is_admin()) {
-        if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
-            wp_enqueue_script('comment-reply');
+            foreach ($blockies as $b => $v) {
+                acf_register_block(array(
+                    'description' => __('A custom' . $b . 'block.'),
+                    'icon' => $v,
+                    'mode' => 'edit',
+                    'name' => $b,
+                    'render_template' => 'template-parts/block/content-testimonial.php',
+                    'render_callback' => 'my_' . $b . '_block_html',
+                    'supports' => array(
+                        'align' => array('wide', 'full'),
+                    ),
+                    'title' => __(ucfirst($b)),
+                ));
+            }
         }
+
+        function my_hero_block_html($block)
+        {
+            $vars['block'] = $block;
+            $vars['fields'] = get_fields();
+
+            Timber::render('/blocks/hero.twig', $vars);
+        }
+    }
+
+    /** This is where you can register custom taxonomies. */
+    public function register_taxonomies()
+    {
+
+    }
+
+    /** This is where you add some context
+     *
+     * @param string $context context['this'] Being the Twig's {{ this }}.
+     */
+    public function add_to_context($context)
+    {
+        $context['menu_primary'] = new TimberMenu('primary');
+        $context['menu_footer_one'] = new TimberMenu('footer_one');
+        $context['menu_footer_two'] = new TimberMenu('footer_two');
+        $context['menu_footer_three'] = new TimberMenu('footer_three');
+        $context['menu_footer_four'] = new TimberMenu('footer_four');
+        $context['menu_secondary'] = new TimberMenu('secondary');
+
+        $context['site'] = $this;
+        return $context;
+    }
+
+    public function theme_supports()
+    {
+        if (function_exists('acf_add_options_page')) {
+            acf_add_options_page();
+        }
+
+        add_theme_support('automatic-feed-links');
+        add_theme_support('title-tag');
+        add_theme_support('post-thumbnails');
+        add_theme_support(
+            'html5', array(
+                'gallery',
+            )
+        );
+        add_theme_support(
+            'post-formats', array(
+                'aside',
+                'image',
+                'video',
+                'link',
+                'gallery',
+            )
+        );
+        add_theme_support('menus');
+
+        add_theme_support('align-wide');
+        add_theme_support('disable-custom-colors');
+        add_theme_support('disable-custom-font-sizes');
+    }
+
+    public function misha_allowed_block_types($allowed_blocks)
+    {
+        $blockArray = array();
+        $blockies = array('hero');
+
+        foreach ($blockies as $v) {
+            array_push($blockArray, 'acf/' . $v);
+        }
+
+        return $blockArray;
+    }
+
+    public function prefix_disable_gutenberg($current_status, $post_type)
+    {
+        return $current_status;
+    }
+
+    public function cc_mime_types($mimes)
+    {
+        $mimes['webp'] = 'image/webp';
+        return $mimes;
+    }
+
+    public function remove_image_size_attributes($html)
+    {
+        return preg_replace('/(width|height)="\d*"/', '', $html);
+    }
+
+    public function legacy_functions()
+    {
+        include_once 'includes/functions/get-acf-images.php';
+        include_once 'includes/functions/get-acf-titles.php';
+        include_once 'includes/functions/convert-the-content.php';
+
+        include_once 'includes/rest-inspiration.php';
+        include_once 'includes/rest-menus.php';
+        include_once 'includes/rest-options.php';
+        include_once 'includes/rest-pages.php';
+        include_once 'includes/rest-posts.php';
     }
 }
 
-// Custom Comments Callback
-function html5blankcomments($comment, $args, $depth)
-{
-	$GLOBALS['comment'] = $comment;
-	extract($args, EXTR_SKIP);
-
-	if ( 'div' == $args['style'] ) {
-		$tag = 'div';
-		$add_below = 'comment';
-	} else {
-		$tag = 'li';
-		$add_below = 'div-comment';
-	}
-?>
-    <!-- heads up: starting < for the html tag (li or div) in the next line: -->
-    <<?php echo $tag ?> <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
-	<?php if ( 'div' != $args['style'] ) : ?>
-	<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
-	<?php endif; ?>
-	<div class="comment-author vcard">
-	<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['180'] ); ?>
-	<?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link()) ?>
-	</div>
-<?php if ($comment->comment_approved == '0') : ?>
-	<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
-	<br />
-<?php endif; ?>
-
-	<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-		<?php
-			printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
-		?>
-	</div>
-
-	<?php comment_text() ?>
-
-	<div class="reply">
-	<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-	</div>
-	<?php if ( 'div' != $args['style'] ) : ?>
-	</div>
-	<?php endif; ?>
-<?php }
-
-/*------------------------------------*\
-	Actions + Filters + ShortCodes
-\*------------------------------------*/
-
-// Add Actions
-add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
-add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
-add_action('wp_enqueue_scripts', 'modernizr_script'); // Add Theme Stylesheet
-add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
-add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
-add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
-
-// Remove Actions
-remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
-remove_action('wp_head', 'feed_links', 2); // Display the links to the general feeds: Post and Comment Feed
-remove_action('wp_head', 'rsd_link'); // Display the link to the Really Simple Discovery service endpoint, EditURI link
-remove_action('wp_head', 'wlwmanifest_link'); // Display the link to the Windows Live Writer manifest file.
-remove_action('wp_head', 'index_rel_link'); // Index link
-remove_action('wp_head', 'parent_post_rel_link', 10, 0); // Prev link
-remove_action('wp_head', 'start_post_rel_link', 10, 0); // Start link
-remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // Display relational links for the posts adjacent to the current post.
-remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is generated on the wp_head hook, WP version
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-remove_action('wp_head', 'rel_canonical');
-remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
-
-// Add Filters
-add_filter('avatar_defaults', 'html5blankgravatar'); // Custom Gravatar in Settings > Discussion
-add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
-add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sidebar
-add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
-add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
-add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
-add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
-add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
-add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
-add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
-
-// Remove jQuery Migrate Script from header and Load jQuery from Google API
-function crunchify_stop_loading_wp_embed_and_jquery() {
-	if (!is_admin()) {
-		wp_deregister_script('wp-embed');
-		wp_deregister_script('jquery');  // Bonus: remove jquery too if it's not required
-	}
-}
-add_action('init', 'crunchify_stop_loading_wp_embed_and_jquery');
-
-// Remove WP Emoji
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-remove_action('wp_print_styles', 'print_emoji_styles');
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-remove_action( 'admin_print_styles', 'print_emoji_styles' );
-
-
-include_once('includes/rest_blogs.php');
-
-?>
+new StarterSite();

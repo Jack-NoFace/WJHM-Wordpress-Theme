@@ -1,16 +1,20 @@
-<?php get_header(); ?>
-	<main role="main">
-		<?php while (have_posts()) : the_post(); ?>
-			<div class="wrapper post">
-				<div class="post__meta text-align--center">
-					<div class="padding--normal">
-						<h1><?php the_title(); ?></h1>
-						<?php $date = the_date('jS F Y'); if ($date) { echo '<span class="color-grey">Published: ' . $date . '</span>'; } ?>
-						<?php $categories = get_the_category();	if ( ! empty( $categories ) ) { echo '<span class="color-grey"> | ' . esc_html( $categories[0]->name ) . '</span>'; } ?>
-					</div>
-				</div>
-			<?php the_content(); // Dynamic Content ?>
-			</div>
-		<?php endwhile; ?>
-	</main>
-<?php get_footer(); ?>
+<?php
+/**
+ * The Template for displaying all single posts
+ *
+ * Methods for TimberHelper can be found in the /lib sub-directory
+ *
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
+ */
+
+$context = Timber::context();
+$timber_post = Timber::query_post();
+$context['post'] = $timber_post;
+
+if ( post_password_required( $timber_post->ID ) ) {
+	Timber::render( 'single-password.twig', $context );
+} else {
+	Timber::render( array( 'single-' . $timber_post->ID . '.twig', 'single-' . $timber_post->post_type . '.twig', 'single.twig' ), $context );
+}
