@@ -35,6 +35,9 @@ function rest_pages($data)
         );
     endif;
 
+    $no_content = (object) [];
+    $no_content->status = "empty";
+
     $loop = new WP_Query($args);
 
     if ($loop) {
@@ -43,7 +46,7 @@ function rest_pages($data)
             $the_content = convert_content(get_the_content());
             if ($the_content === []) {
                 array_push(
-                    $the_content, (object) []
+                    $the_content, $no_content
                 );
             }
             array_push(
