@@ -79,6 +79,41 @@ class StarterSite extends Timber\Site
     /** This is where you can register custom post types. */
     public function register_post_types()
     {
+        register_taxonomy_for_object_type('category', 'event');
+        register_taxonomy_for_object_type('post_tag', 'event');
+        register_post_type('event',
+            array(
+                'labels' => array(
+                    'name' => __('Event', 'event'),
+                    'singular_name' => __('Event', 'event'),
+                    'add_new' => __('Add New', 'event'),
+                    'add_new_item' => __('Add New Event', 'event'),
+                    'edit' => __('Edit', 'event'),
+                    'edit_item' => __('Edit Event', 'event'),
+                    'new_item' => __('New Event', 'event'),
+                    'view' => __('View Event', 'event'),
+                    'view_item' => __('View Event', 'event'),
+                    'search_items' => __('Search Event', 'event'),
+                    'not_found' => __('No Events found', 'event'),
+                    'not_found_in_trash' => __('No Events found in Trash', 'event'),
+                ),
+                'public' => true,
+                'hierarchical' => true,
+                'has_archive' => true,
+                'supports' => array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ),
+                'show_in_rest' => true,
+                'menu_icon' => 'dashicons-format-status',
+                'can_export' => true,
+                'taxonomies' => array(
+                    'post_tag',
+                    'category',
+                ),
+            ));
+
         register_taxonomy_for_object_type('category', 'inspiration');
         register_taxonomy_for_object_type('post_tag', 'inspiration');
         register_post_type('inspiration',
