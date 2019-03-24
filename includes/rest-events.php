@@ -44,9 +44,7 @@ function rest_events($data)
             $the_content = get_the_content();
             array_push(
                 $eventItems, array(
-                    'category' => get_the_category(),
-                    'content' => $the_content,
-                    'date' => get_the_date('c'),
+                    'date' => get_the_field('date'),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
                     'id' => get_the_ID(),
                     'imageLargest' => get_the_post_thumbnail_url(get_the_ID(), 'largest'),
@@ -58,10 +56,8 @@ function rest_events($data)
                     'thumbnailDefault' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail-default'),
                     'thumbnailSmall' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail-small'),
                     'imageFull' => get_the_post_thumbnail_url(),
-                    'link' => get_the_permalink(),
-                    'seoTitle' => get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
-                    'slug' => get_post_field('post_name'),
                     'title' => html_entity_decode(get_the_title()),
+                    'venue' => get_the_field('venue'),
                 )
             );
         endwhile;
