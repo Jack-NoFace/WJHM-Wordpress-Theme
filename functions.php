@@ -201,8 +201,8 @@ class StarterSite extends Timber\Site
     {
         if (function_exists('acf_register_block')) {
 
-            $blockies = array('row');
-            $blockiesIcons = array('align-center');
+            $blockies = array('hero', 'row');
+            $blockiesIcons = array('align-center', 'align-center');
 
             $blockies = array_combine($blockies, $blockiesIcons);
 
@@ -219,6 +219,14 @@ class StarterSite extends Timber\Site
                     'title' => __(ucfirst($b)),
                 ));
             }
+        }
+
+        function my_hero_block_html($block)
+        {
+            $vars['block'] = $block;
+            $vars['fields'] = get_fields();
+
+            Timber::render('/blocks/hero.twig', $vars);
         }
 
         function my_row_block_html($block)
@@ -286,7 +294,7 @@ class StarterSite extends Timber\Site
     public function misha_allowed_block_types($allowed_blocks)
     {
         $blockArray = array();
-        $blockies = array('row');
+        $blockies = array('hero', 'row');
 
         foreach ($blockies as $v) {
             array_push($blockArray, 'acf/' . $v);
