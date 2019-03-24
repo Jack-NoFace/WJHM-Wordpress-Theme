@@ -42,7 +42,7 @@ function rest_events($data)
         while ($loop->have_posts()): $loop->the_post();
             array_push(
                 $eventItems, array(
-                    'date' => get_the_field('date'),
+                    'date' => get_field('date'),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
                     'id' => get_the_ID(),
                     'imageLargest' => get_the_post_thumbnail_url(get_the_ID(), 'largest'),
@@ -55,7 +55,7 @@ function rest_events($data)
                     'thumbnailSmall' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail-small'),
                     'imageFull' => get_the_post_thumbnail_url(),
                     'title' => html_entity_decode(get_the_title()),
-                    'venue' => get_the_field('venue'),
+                    'venue' => get_field('venue'),
                 )
             );
         endwhile;
