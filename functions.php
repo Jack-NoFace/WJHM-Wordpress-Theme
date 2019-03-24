@@ -113,6 +113,76 @@ class StarterSite extends Timber\Site
                     'category',
                 ),
             ));
+
+        register_taxonomy_for_object_type('category', 'journal');
+        register_taxonomy_for_object_type('post_tag', 'journal');
+        register_post_type('journal',
+            array(
+                'labels' => array(
+                    'name' => __('Journal', 'journal'),
+                    'singular_name' => __('Journal', 'journal'),
+                    'add_new' => __('Add New', 'journal'),
+                    'add_new_item' => __('Add New Journal', 'journal'),
+                    'edit' => __('Edit', 'journal'),
+                    'edit_item' => __('Edit Journal', 'journal'),
+                    'new_item' => __('New Journal', 'journal'),
+                    'view' => __('View Journal', 'journal'),
+                    'view_item' => __('View Journal', 'journal'),
+                    'search_items' => __('Search Journal', 'journal'),
+                    'not_found' => __('No Journals found', 'journal'),
+                    'not_found_in_trash' => __('No Journals found in Trash', 'journal'),
+                ),
+                'public' => true,
+                'hierarchical' => true,
+                'has_archive' => true,
+                'supports' => array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ),
+                'show_in_rest' => true,
+                'menu_icon' => 'dashicons-format-status',
+                'can_export' => true,
+                'taxonomies' => array(
+                    'post_tag',
+                    'category',
+                ),
+            ));
+
+        register_taxonomy_for_object_type('category', 'review');
+        register_taxonomy_for_object_type('post_tag', 'review');
+        register_post_type('review',
+            array(
+                'labels' => array(
+                    'name' => __('Review', 'review'),
+                    'singular_name' => __('Review', 'review'),
+                    'add_new' => __('Add New', 'review'),
+                    'add_new_item' => __('Add New Review', 'review'),
+                    'edit' => __('Edit', 'review'),
+                    'edit_item' => __('Edit Review', 'review'),
+                    'new_item' => __('New Review', 'review'),
+                    'view' => __('View Review', 'review'),
+                    'view_item' => __('View Review', 'review'),
+                    'search_items' => __('Search Review', 'review'),
+                    'not_found' => __('No Reviews found', 'review'),
+                    'not_found_in_trash' => __('No Reviews found in Trash', 'review'),
+                ),
+                'public' => true,
+                'hierarchical' => true,
+                'has_archive' => true,
+                'supports' => array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ),
+                'show_in_rest' => true,
+                'menu_icon' => 'dashicons-format-status',
+                'can_export' => true,
+                'taxonomies' => array(
+                    'post_tag',
+                    'category',
+                ),
+            ));
     }
 
     public function register_my_menu()
@@ -249,10 +319,12 @@ class StarterSite extends Timber\Site
         include_once 'includes/functions/convert-the-content.php';
 
         include_once 'includes/rest-inspiration.php';
+        include_once 'includes/rest-journal.php';
         include_once 'includes/rest-menus.php';
         include_once 'includes/rest-options.php';
         include_once 'includes/rest-pages.php';
         include_once 'includes/rest-posts.php';
+        include_once 'includes/rest-review.php';
     }
 }
 
