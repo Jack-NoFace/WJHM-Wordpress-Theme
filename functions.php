@@ -384,6 +384,7 @@ class StarterSite extends Timber\Site
         include_once 'includes/functions/get-acf-titles.php';
         include_once 'includes/functions/convert-the-content.php';
 
+        include_once 'includes/rest-event.php';
         include_once 'includes/rest-inspiration.php';
         include_once 'includes/rest-journal.php';
         include_once 'includes/rest-menus.php';

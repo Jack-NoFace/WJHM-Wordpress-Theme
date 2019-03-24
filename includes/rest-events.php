@@ -40,8 +40,6 @@ function rest_events($data)
     if ($loop) {
         $eventItems = array();
         while ($loop->have_posts()): $loop->the_post();
-            $the_content = convert_content(get_the_content());
-            $the_content = get_the_content();
             array_push(
                 $eventItems, array(
                     'date' => get_the_field('date'),
