@@ -201,7 +201,7 @@ class StarterSite extends Timber\Site
     {
         if (function_exists('acf_register_block')) {
 
-            $blockies = array('hero');
+            $blockies = array('row');
             $blockiesIcons = array('align-center');
 
             $blockies = array_combine($blockies, $blockiesIcons);
@@ -212,7 +212,6 @@ class StarterSite extends Timber\Site
                     'icon' => $v,
                     'mode' => 'edit',
                     'name' => $b,
-                    'render_template' => 'template-parts/block/content-testimonial.php',
                     'render_callback' => 'my_' . $b . '_block_html',
                     'supports' => array(
                         'align' => array('wide', 'full'),
@@ -222,12 +221,12 @@ class StarterSite extends Timber\Site
             }
         }
 
-        function my_hero_block_html($block)
+        function my_row_block_html($block)
         {
             $vars['block'] = $block;
             $vars['fields'] = get_fields();
 
-            Timber::render('/blocks/hero.twig', $vars);
+            Timber::render('/blocks/row.twig', $vars);
         }
     }
 
@@ -287,7 +286,7 @@ class StarterSite extends Timber\Site
     public function misha_allowed_block_types($allowed_blocks)
     {
         $blockArray = array();
-        $blockies = array('hero');
+        $blockies = array('row');
 
         foreach ($blockies as $v) {
             array_push($blockArray, 'acf/' . $v);

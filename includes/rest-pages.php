@@ -40,12 +40,7 @@ function rest_pages($data)
     if ($loop) {
         $pageItems = array();
         while ($loop->have_posts()): $loop->the_post();
-            $slug = get_page_template_slug(get_the_ID());
-            if ($slug !== "template-fields.php") {
-                $the_content = convert_content(get_the_content());
-            } else {
-                $the_content = get_field_objects();
-            }
+            $the_content = convert_content(get_the_content());
             array_push(
                 $pageItems, array(
                     'content' => $the_content,
