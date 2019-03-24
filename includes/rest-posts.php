@@ -45,7 +45,7 @@ function rest_posts($data)
             array_push(
                 $insightItems, array(
                     'content' => $the_content,
-                    'date' => get_the_date('c'),
+                    'date' => the_time('c'),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
                     'id' => get_the_ID(),
                     'imageLargest' => get_the_post_thumbnail_url(get_the_ID(), 'largest'),
