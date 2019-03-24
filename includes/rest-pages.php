@@ -41,6 +41,9 @@ function rest_pages($data)
         $pageItems = array();
         while ($loop->have_posts()): $loop->the_post();
             $the_content = convert_content(get_the_content());
+            if ($the_content === []) {
+                $the_content = false;
+            }
             array_push(
                 $pageItems, array(
                     'content' => $the_content,
