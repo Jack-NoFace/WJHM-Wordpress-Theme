@@ -17,6 +17,7 @@ function convert_content($content)
     $content = str_replace('<!-- wp:acf/dribbble ', '', $content);
     $content = str_replace('<!-- wp:acf/github ', '', $content);
     $content = str_replace('<!-- wp:acf/hero ', '', $content);
+    $content = str_replace('<!-- wp:acf/intro ', '', $content);
     $content = str_replace('<!-- wp:acf/presentations ', '', $content);
     $content = str_replace('<!-- wp:acf/row ', '', $content);
     $content = str_replace('https://wjhm.noface.app/', '/', $content);
