@@ -236,8 +236,8 @@ class StarterSite extends Timber\Site
     {
         if (function_exists('acf_register_block')) {
 
-            $blockies = array('dribbble', 'github', 'hero', 'presentations', 'row');
-            $blockiesIcons = array('align-center', 'align-center', 'align-center', 'align-center', 'align-center');
+            $blockies = array('dribbble', 'github', 'hero', 'intro', 'presentations', 'row');
+            $blockiesIcons = array('align-center', 'align-center', 'align-center', 'align-center', 'align-center', 'align-center');
 
             $blockies = array_combine($blockies, $blockiesIcons);
 
@@ -264,6 +264,14 @@ class StarterSite extends Timber\Site
             Timber::render('/blocks/dribbble.twig', $vars);
         }
 
+        function my_github_block_html($block)
+        {
+            $vars['block'] = $block;
+            $vars['fields'] = get_fields();
+
+            Timber::render('/blocks/github.twig', $vars);
+        }
+
         function my_hero_block_html($block)
         {
             $vars['block'] = $block;
@@ -272,12 +280,12 @@ class StarterSite extends Timber\Site
             Timber::render('/blocks/hero.twig', $vars);
         }
 
-        function my_github_block_html($block)
+        function my_intro_block_html($block)
         {
             $vars['block'] = $block;
             $vars['fields'] = get_fields();
 
-            Timber::render('/blocks/github.twig', $vars);
+            Timber::render('/blocks/intro.twig', $vars);
         }
 
         function my_presentations_block_html($block)
@@ -353,7 +361,7 @@ class StarterSite extends Timber\Site
     public function misha_allowed_block_types($allowed_blocks)
     {
         $blockArray = array();
-        $blockies = array('dribbble', 'github', 'hero', 'presentations', 'row');
+        $blockies = array('dribbble', 'github', 'hero', 'intro', 'presentations', 'row');
 
         foreach ($blockies as $v) {
             array_push($blockArray, 'acf/' . $v);
