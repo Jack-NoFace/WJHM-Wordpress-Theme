@@ -60,7 +60,7 @@ function rest_posts($data)
                     'link' => get_the_permalink(),
                     'seoTitle' => get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
                     'slug' => get_post_field('post_name'),
-                    'title' => get_the_title(),
+                    'title' => html_entity_decode(get_the_title()),
                 )
             );
         endwhile;
