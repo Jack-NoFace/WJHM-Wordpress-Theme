@@ -40,8 +40,7 @@ function rest_posts($data)
     if ($loop) {
         $insightItems = array();
         while ($loop->have_posts()): $loop->the_post();
-            $the_content = convert_content(get_the_content());
-            $the_content = get_the_content();
+            $the_content = wpautop(get_the_content());
             array_push(
                 $insightItems, array(
                     'content' => $the_content,
