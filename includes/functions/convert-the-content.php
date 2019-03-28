@@ -20,6 +20,7 @@ function convert_content($content)
     $content = str_replace('<!-- wp:acf/intro ', '', $content);
     $content = str_replace('<!-- wp:acf/presentations ', '', $content);
     $content = str_replace('<!-- wp:acf/row ', '', $content);
+    $content = str_replace('<!-- wp:acf/testimonials ', '', $content);
     $content = str_replace('https://wjhm.noface.app/', '/', $content);
     $content = str_replace('http://local-whatjackhasmade.co.uk/', '/', $content);
     $content = str_replace(' /-->', ',', $content);

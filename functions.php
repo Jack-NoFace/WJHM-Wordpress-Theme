@@ -236,8 +236,8 @@ class StarterSite extends Timber\Site
     {
         if (function_exists('acf_register_block')) {
 
-            $blockies = array('dribbble', 'github', 'hero', 'intro', 'presentations', 'row');
-            $blockiesIcons = array('align-center', 'align-center', 'align-center', 'align-center', 'align-center', 'align-center');
+            $blockies = array('dribbble', 'github', 'hero', 'intro', 'presentations', 'row', 'testimonials');
+            $blockiesIcons = array('admin-customizer', 'screenoptions', 'align-center', 'editor-alignleft', 'format-chat', 'align-left', 'format-quote');
 
             $blockies = array_combine($blockies, $blockiesIcons);
 
@@ -361,7 +361,7 @@ class StarterSite extends Timber\Site
     public function misha_allowed_block_types($allowed_blocks)
     {
         $blockArray = array();
-        $blockies = array('dribbble', 'github', 'hero', 'intro', 'presentations', 'row');
+        $blockies = array('dribbble', 'github', 'hero', 'intro', 'presentations', 'row', 'testimonials');
 
         foreach ($blockies as $v) {
             array_push($blockArray, 'acf/' . $v);
