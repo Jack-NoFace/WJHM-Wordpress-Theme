@@ -47,7 +47,6 @@ function rest_inspirations($data)
                     'date' => get_the_date('c'),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
                     'id' => get_the_ID(),
-                    'link' => get_the_permalink(),
                     'media' => get_field('media'),
                     'seoTitle' => get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
                     'slug' => get_post_field('post_name'),
