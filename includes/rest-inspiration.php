@@ -40,25 +40,15 @@ function rest_inspirations($data)
     if ($loop) {
         $inspirationItems = array();
         while ($loop->have_posts()): $loop->the_post();
-            $the_content = convert_content(get_the_content());
-            $the_content = get_the_content();
             array_push(
                 $inspirationItems, array(
                     'category' => get_the_category(),
-                    'content' => $the_content,
+                    'content' => get_the_content(),
                     'date' => get_the_date('c'),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
                     'id' => get_the_ID(),
-                    'imageLargest' => get_the_post_thumbnail_url(get_the_ID(), 'largest'),
-                    'imageDesktop' => get_the_post_thumbnail_url(get_the_ID(), 'desktop'),
-                    'imageLaptop' => get_the_post_thumbnail_url(get_the_ID(), 'laptop'),
-                    'imageTablet' => get_the_post_thumbnail_url(get_the_ID(), 'tablet'),
-                    'imageMobile' => get_the_post_thumbnail_url(get_the_ID(), 'mobile'),
-                    'thumbnailTall' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail-tall'),
-                    'thumbnailDefault' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail-default'),
-                    'thumbnailSmall' => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail-small'),
-                    'imageFull' => get_the_post_thumbnail_url(),
                     'link' => get_the_permalink(),
+                    'media' => get_field('media'),
                     'seoTitle' => get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
                     'slug' => get_post_field('post_name'),
                     'title' => html_entity_decode(get_the_title()),
