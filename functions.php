@@ -106,7 +106,7 @@ class StarterSite extends Timber\Site
                     'thumbnail',
                 ),
                 'show_in_rest' => true,
-                'menu_icon' => 'dashicons-format-status',
+                'menu_icon' => 'dashicons-tickets',
                 'can_export' => true,
                 'taxonomies' => array(
                     'post_tag',
@@ -141,7 +141,7 @@ class StarterSite extends Timber\Site
                     'thumbnail',
                 ),
                 'show_in_rest' => true,
-                'menu_icon' => 'dashicons-format-status',
+                'menu_icon' => 'dashicons-images-alt2',
                 'can_export' => true,
                 'taxonomies' => array(
                     'post_tag',
@@ -176,7 +176,7 @@ class StarterSite extends Timber\Site
                     'thumbnail',
                 ),
                 'show_in_rest' => true,
-                'menu_icon' => 'dashicons-format-status',
+                'menu_icon' => 'dashicons-welcome-write-blog',
                 'can_export' => true,
                 'taxonomies' => array(
                     'post_tag',
