@@ -10,7 +10,6 @@ function getACFImages($content)
         foreach ($array_obj as $key => $value) {
             if (is_numeric($value)):
                 if (wp_get_attachment_image_src($value, 'full')):
-                    echo "$key holds $value\n";
                     $imageIDs[] = $value;
                 endif;
             endif;
@@ -39,7 +38,17 @@ function getACFImages($content)
             }
         }
 
-        print_r($links);
+        array_walk_recursive($content, function (&$value, $key) use ($links) {
+            if (!is_array($value) && $key === 'media') {
+                foreach ($links as $imageKey => $imageValue) {
+                    if ($value === $imageKey) {
+                        $value = $imageValue;
+                    }
+                }
+            }
+        });
+
+        return $content;
 
     endif;
 
