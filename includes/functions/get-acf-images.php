@@ -3,19 +3,28 @@
 function getACFImages($content)
 {
     if (!empty($content)):
-        $replaces = array();
 
-        $array = json_decode($content, true);
+        $imageIDs = [];
+        $mediaObjects = [];
 
-        $array = (array) $array;
-
-        array_walk_recursive($array, function (&$v, $k) {
-            if ($k == 'media') {
-                $v = wp_get_attachment_url($v);
+        foreach ($content as $page) {
+            if (isset($page["attrs"]["data"]["media"])) {
+                $id = $page["attrs"]["data"]["media"];
+                array_push($imageIDs, $id);
             }
-        });
+        }
+
+        foreach ($imageIDs as $media) {
+            $sizes = (get_intermediate_image_sizes($media));
+            foreach ($sizes as $size) {
+                $media = wp_get_attachment_image_src($media, $size);
+                array_push($mediaObjects, $media);
+            }
+        }
+
+        print_r($mediaObjects);
 
     endif;
 
-    return $array;
+    return $content;
 }

@@ -17,23 +17,11 @@ add_action('rest_api_init', function () {
 
 function rest_journals($data)
 {
-    $params = $data->get_params();
-    $slug = $params['slug'];
-
-    if ($slug):
-        $args = array(
-            'name' => $slug,
-            'numberposts' => 1,
-            'post_status' => 'publish',
-            'post_type' => 'journal',
-        );
-    else:
-        $args = array(
-            'posts_per_page' => -1,
-            'post_status' => 'publish',
-            'post_type' => 'journal',
-        );
-    endif;
+    $args = array(
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post_type' => 'journal',
+    );
 
     $loop = new WP_Query($args);
 

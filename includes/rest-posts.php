@@ -18,9 +18,14 @@ add_action('rest_api_init', function () {
 function rest_posts($data)
 {
     $params = $data->get_params();
-    $slug = $params['slug'];
 
-    if ($slug):
+    $slug = "";
+
+    if (isset($params['slug'])):
+        $slug = $params['slug'];
+    endif;
+
+    if ($slug != ""):
         $args = array(
             'name' => $slug,
             'numberposts' => 1,

@@ -17,23 +17,11 @@ add_action('rest_api_init', function () {
 
 function rest_reviews($data)
 {
-    $params = $data->get_params();
-    $slug = $params['slug'];
-
-    if ($slug):
-        $args = array(
-            'name' => $slug,
-            'numberposts' => 1,
-            'post_status' => 'publish',
-            'post_type' => 'review',
-        );
-    else:
-        $args = array(
-            'posts_per_page' => -1,
-            'post_status' => 'publish',
-            'post_type' => 'review',
-        );
-    endif;
+    $args = array(
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post_type' => 'review',
+    );
 
     $loop = new WP_Query($args);
 
