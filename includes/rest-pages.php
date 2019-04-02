@@ -18,9 +18,14 @@ add_action('rest_api_init', function () {
 function rest_pages($data)
 {
     $params = $data->get_params();
-    $slug = $params['slug'];
 
-    if ($slug):
+    $slug = "";
+
+    if (isset($params['slug'])):
+        $slug = $params['slug'];
+    endif;
+
+    if ($slug != ""):
         $args = array(
             'pagename' => $slug,
             'posts_per_page' => -1,
