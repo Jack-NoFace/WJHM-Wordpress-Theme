@@ -12,7 +12,7 @@ function convert_content($content)
 
     $content = parse_blocks($content);
 
-    // $content = getACFImages($content);
+    $content = getACFImages($content);
 
     return $content;
 }
