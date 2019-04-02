@@ -52,7 +52,9 @@ function getACFImages($content)
                 }
                 foreach ($videoIDs as $videoKey => $videoValue) {
                     if ($value === $videoValue) {
-                        $value = wp_get_attachment_url($videoValue);
+                        $videoFull = [];
+                        $videoFull["full"] = wp_get_attachment_url($videoValue);
+                        $value = $videoFull;
                     }
                 }
             }
