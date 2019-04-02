@@ -14,5 +14,14 @@ function convert_content($content)
 
     $content = getACFImages($content);
 
+    foreach ($content as $block) {
+        // print_r($block);
+
+        // // Setup postdata allowing get_field() to work.
+        // acf_setup_postdata($block['attrs']['data'], $block['attrs']['id'], true);
+        // // get_fields()
+        // acf_reset_postdata($block['id']);
+    }
+
     return $content;
 }

@@ -1,8 +1,4 @@
 <?php
-// // Setup postdata allowing get_field() to work.
-// acf_setup_postdata($block['data'], $block['id'], true);
-// // get_fields()
-// acf_reset_postdata($block['id']);
 
 function getACFImages($content)
 {
