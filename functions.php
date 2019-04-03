@@ -38,15 +38,10 @@ class StarterSite extends Timber\Site
         add_action('after_setup_theme', array($this, 'theme_supports'));
         add_action('after_setup_theme', array($this, 'legacy_functions'));
         add_filter('timber_context', array($this, 'add_to_context'));
-        add_filter('allowed_block_types', array($this, 'misha_allowed_block_types'));
         add_filter('upload_mimes', array($this, 'cc_mime_types'));
         add_action('init', array($this, 'register_blocks'));
         add_action('init', array($this, 'register_post_types'));
-        add_action('init', array($this, 'register_taxonomies'));
         add_action('init', array($this, 'register_my_menu'));
-        add_action('wp_enqueue_scripts', array($this, 'loadScripts'));
-        add_action('wp_enqueue_scripts', array($this, 'loadStyles'));
-        add_action('get_footer', array($this, 'footerStyles'));
         add_action('acf/init', array($this, 'my_acf_init'));
         add_image_size('ratio', 300, 300, true);
         add_image_size('featured_xs', 350, 175, true);
@@ -62,18 +57,6 @@ class StarterSite extends Timber\Site
         add_filter('image_send_to_editor', array($this, 'remove_image_size_attributes'));
         apply_filters('rocket_cache_reject_wp_rest_api', false);
         parent::__construct();
-    }
-
-    public function loadScripts()
-    {
-    }
-
-    public function loadStyles()
-    {
-    }
-
-    public function footerStyles()
-    {
     }
 
     /** This is where you can register custom post types. */
@@ -247,7 +230,6 @@ class StarterSite extends Timber\Site
                     'icon' => $v,
                     'mode' => 'edit',
                     'name' => $b,
-                    'render_callback' => 'my_' . $b . '_block_html',
                     'supports' => array(
                         'align' => array('wide', 'full'),
                     ),
@@ -255,60 +237,6 @@ class StarterSite extends Timber\Site
                 ));
             }
         }
-
-        function my_dribbble_block_html($block)
-        {
-            $vars['block'] = $block;
-            $vars['fields'] = get_fields();
-
-            Timber::render('/blocks/dribbble.twig', $vars);
-        }
-
-        function my_github_block_html($block)
-        {
-            $vars['block'] = $block;
-            $vars['fields'] = get_fields();
-
-            Timber::render('/blocks/github.twig', $vars);
-        }
-
-        function my_hero_block_html($block)
-        {
-            $vars['block'] = $block;
-            $vars['fields'] = get_fields();
-
-            Timber::render('/blocks/hero.twig', $vars);
-        }
-
-        function my_intro_block_html($block)
-        {
-            $vars['block'] = $block;
-            $vars['fields'] = get_fields();
-
-            Timber::render('/blocks/intro.twig', $vars);
-        }
-
-        function my_presentations_block_html($block)
-        {
-            $vars['block'] = $block;
-            $vars['fields'] = get_fields();
-
-            Timber::render('/blocks/presentations.twig', $vars);
-        }
-
-        function my_row_block_html($block)
-        {
-            $vars['block'] = $block;
-            $vars['fields'] = get_fields();
-
-            Timber::render('/blocks/row.twig', $vars);
-        }
-    }
-
-    /** This is where you can register custom taxonomies. */
-    public function register_taxonomies()
-    {
-
     }
 
     /** This is where you add some context
@@ -356,23 +284,6 @@ class StarterSite extends Timber\Site
         add_theme_support('align-wide');
         add_theme_support('disable-custom-colors');
         add_theme_support('disable-custom-font-sizes');
-    }
-
-    public function misha_allowed_block_types($allowed_blocks)
-    {
-        $blockArray = array();
-        $blockies = array('dribbble', 'github', 'hero', 'intro', 'presentations', 'row', 'testimonials');
-
-        foreach ($blockies as $v) {
-            array_push($blockArray, 'acf/' . $v);
-        }
-
-        return $blockArray;
-    }
-
-    public function prefix_disable_gutenberg($current_status, $post_type)
-    {
-        return $current_status;
     }
 
     public function cc_mime_types($mimes)
