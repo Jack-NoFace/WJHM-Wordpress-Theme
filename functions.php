@@ -378,6 +378,7 @@ class StarterSite extends Timber\Site
     public function cc_mime_types($mimes)
     {
         $mimes['webp'] = 'image/webp';
+        $mimes['svg'] = 'image/svg+xml';
         return $mimes;
     }
 
