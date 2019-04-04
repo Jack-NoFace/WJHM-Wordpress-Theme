@@ -65,12 +65,12 @@ function rest_pages($data)
                     'imageXL' => get_the_post_thumbnail_url(get_the_ID(), 'featured_xl'),
                     'imageFull' => get_the_post_thumbnail_url(),
                     'slug' => get_post_field('post_name'),
-                    'title' => get_the_title(),
+                    'title' => html_entity_decode(get_the_title()),
                     'yoast' => array(
                         'description' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
                         'image' => get_the_post_thumbnail_url(get_the_ID(), 'featured_lg'),
                         'slug' => get_post_field('post_name'),
-                        'title' => html_entity_decode(get_the_title()),
+                        'title' => $yoast_title = get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
                     ),
                 )
             );
