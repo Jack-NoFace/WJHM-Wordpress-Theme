@@ -20,17 +20,19 @@ function convert_content($content)
             acf_setup_postdata($block['attrs']['data'], $block['attrs']['id'], true);
 
             // get_fields()
-            if ($block['blockName'] === "acf/testimonials") {
+            if ($block['blockName'] === "acf/testimonials"):
                 $testimonials = $block['attrs']['data']['testimonials'];
 
-                foreach ($testimonials as $value) {
-                    $valueObject = json_encode($value, true);
-                    $valueObject = json_decode($valueObject, true);
-                    $testimonialObjects[] = $valueObject;
-                }
+                if (is_array($testimonials) || is_object($testimonials)):
+                    foreach ($testimonials as $value) {
+                        $valueObject = json_encode($value, true);
+                        $valueObject = json_decode($valueObject, true);
+                        $testimonialObjects[] = $valueObject;
+                    }
 
-                $block['attrs']['data']['testimonials'] = $testimonialObjects;
-            }
+                    $block['attrs']['data']['testimonials'] = $testimonialObjects;
+                endif;
+            endif;
 
             // reset_loop()
             acf_reset_postdata($block['attrs']['id']);
