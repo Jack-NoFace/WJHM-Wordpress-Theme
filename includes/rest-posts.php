@@ -65,6 +65,12 @@ function rest_posts($data)
                     'seoTitle' => get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
                     'slug' => get_post_field('post_name'),
                     'title' => html_entity_decode(get_the_title()),
+                    'yoast' => array(
+                        'description' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
+                        'image' => get_the_post_thumbnail_url(get_the_ID(), 'featured_lg'),
+                        'slug' => get_post_field('post_name'),
+                        'title' => get_post_meta(get_the_ID(), '_yoast_wpseo_title', true),
+                    ),
                 )
             );
         endwhile;

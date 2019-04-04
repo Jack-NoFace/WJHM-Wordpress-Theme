@@ -271,7 +271,6 @@ class StarterSite extends Timber\Site
 
         include_once 'includes/rest-events.php';
         include_once 'includes/rest-inspiration.php';
-        include_once 'includes/rest-journal.php';
         include_once 'includes/rest-menus.php';
         include_once 'includes/rest-options.php';
         include_once 'includes/rest-pages.php';
