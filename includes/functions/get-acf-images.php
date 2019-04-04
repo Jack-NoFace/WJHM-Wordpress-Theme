@@ -4,29 +4,28 @@ function getACFImages($content)
 {
     if (!empty($content)):
 
-        $imageIDs = [];
-        $videoIDs = [];
-
-        $array_obj = new RecursiveIteratorIterator(new RecursiveArrayIterator($content));
-        foreach ($array_obj as $key => $value) {
-            if (is_numeric($value)):
-                if (wp_get_attachment_image_src($value, 'full')):
-                    $imageIDs[] = $value;
-                endif;
-                if (!wp_get_attachment_image_src($value, 'full') && wp_get_attachment_url($value)):
-                    $videoIDs[] = $value;
-                endif;
-            endif;
-        }
-
-        $videoIDs = array_unique($videoIDs);
-
         /* Set up an empty array for the links. */
         $links = array();
+        $imageIDs = array();
+        $videoIDs = array();
 
         /* Get the intermediate image sizes and add the full size to the array. */
         $sizes = get_intermediate_image_sizes();
         $sizes[] = 'full';
+
+        array_walk_recursive($content, function ($value, $key) use (&$imageIDs, &$videoIDs) {
+            $number = intval($value);
+            if (intval($number) > 0):
+                if (wp_get_attachment_image_src($number, 'full')):
+                    $imageIDs[] = $number;
+                endif;
+                if (!wp_get_attachment_image_src($number, 'full') && wp_get_attachment_url($number)):
+                    $videoIDs[] = $number;
+                endif;
+            endif;
+        });
+
+        $videoIDs = array_unique($videoIDs);
 
         foreach ($imageIDs as $media) {
             /* Loop through each of the image sizes. */
@@ -44,14 +43,14 @@ function getACFImages($content)
         }
 
         array_walk_recursive($content, function (&$value, $key) use ($links, $videoIDs) {
-            if (!is_array($value) && $key === 'media') {
+            if (!is_array($value) && $key === 'media' || $key === 'logo') {
                 foreach ($links as $imageKey => $imageValue) {
-                    if ($value === $imageKey) {
+                    if ($value == $imageKey):
                         $value = $imageValue;
-                    }
+                    endif;
                 }
                 foreach ($videoIDs as $videoKey => $videoValue) {
-                    if ($value === $videoValue) {
+                    if ($value == $videoValue) {
                         $videoFull = [];
                         $videoFull["full"] = wp_get_attachment_url($videoValue);
                         $value = $videoFull;
