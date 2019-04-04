@@ -14,14 +14,28 @@ function convert_content($content)
 
     $content = getACFImages($content);
 
-    foreach ($content as $block) {
-        // print_r($block);
+    foreach ($content as &$block) {
+        // Setup postdata allowing get_field() to work.
+        acf_setup_postdata($block['attrs']['data'], $block['attrs']['id'], true);
 
-        // // Setup postdata allowing get_field() to work.
-        // acf_setup_postdata($block['attrs']['data'], $block['attrs']['id'], true);
-        // // get_fields()
-        // acf_reset_postdata($block['id']);
+        // get_fields()
+        if ($block['blockName'] === "acf/testimonials") {
+            $testimonials = $block['attrs']['data']['testimonials'];
+
+            foreach ($testimonials as $value) {
+                $valueObject = json_encode($value, true);
+                $valueObject = json_decode($valueObject, true);
+                $testimonialObjects[] = $valueObject;
+            }
+
+            $block['attrs']['data']['testimonials'] = $testimonialObjects;
+        }
+
+        // reset_loop()
+        acf_reset_postdata($block['attrs']['id']);
     }
+
+    unset($block);
 
     return $content;
 }
