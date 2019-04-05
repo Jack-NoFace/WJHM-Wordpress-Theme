@@ -28,9 +28,10 @@ function rest_inspirations($data)
     if ($loop) {
         $inspirationItems = array();
         while ($loop->have_posts()): $loop->the_post();
+            $post_tags = get_the_tags();
             array_push(
                 $inspirationItems, array(
-                    'category' => get_the_category(),
+                    'category' => $post_tags[0]->name,
                     'content' => get_the_content(),
                     'date' => get_the_date('c'),
                     'excerpt' => get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true),
