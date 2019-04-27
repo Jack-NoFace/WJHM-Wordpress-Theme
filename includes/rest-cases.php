@@ -29,10 +29,13 @@ function rest_cases($data)
         $caseItems = array();
         while ($loop->have_posts()): $loop->the_post();
             $content = new stdClass();
+            $content->blocks = get_field('blocks');
             $content->gallery = get_field('gallery');
             $content->intro = get_field('intro');
-            $content->solution = get_field('solution');
-            $content->defining = get_field('defining');
+            $content->related = get_field('related');
+            $content->siteURL = get_field('site_url');
+            $content->testimonials = get_field('testimonials');
+
             if ((get_field('device_previews'))):
                 $content->devices = get_field('devices');
             else:
